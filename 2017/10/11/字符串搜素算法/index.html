@@ -3,21 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>归档: 2017/10 | Welcome to TonyYang&#39;s Blog</title>
+  <title>字符串搜素算法 | Welcome to TonyYang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="TonyYang,TonyYang's Blog" />
   
-  <meta name="description" content="we have anything you want">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Welcome to TonyYang&#39;s Blog">
-<meta property="og:url" content="http://YangHQ666.com/archives/2017/10/index.html">
+  <meta name="description" content="字符串搜索算法今天上数据结构只讲了搜索算法的最基本的一种，并且较优化的搜索算法也没怎么讲，来此研究一番。 字符串搜索算法的类型kmp算法 kmp算法简介：KMP算法是一种改进的字符串匹配算法，KMP算法的关键是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是实现一个next()函数，函数本身包含了模式串的局部匹配信息。时间复杂度O(m+n)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串搜素算法">
+<meta property="og:url" content="http://YangHQ666.com/2017/10/11/字符串搜素算法/index.html">
 <meta property="og:site_name" content="Welcome to TonyYang&#39;s Blog">
-<meta property="og:description" content="we have anything you want">
+<meta property="og:description" content="字符串搜索算法今天上数据结构只讲了搜索算法的最基本的一种，并且较优化的搜索算法也没怎么讲，来此研究一番。 字符串搜索算法的类型kmp算法 kmp算法简介：KMP算法是一种改进的字符串匹配算法，KMP算法的关键是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是实现一个next()函数，函数本身包含了模式串的局部匹配信息。时间复杂度O(m+n)。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-10-11T13:13:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Welcome to TonyYang&#39;s Blog">
-<meta name="twitter:description" content="we have anything you want">
+<meta name="twitter:title" content="字符串搜素算法">
+<meta name="twitter:description" content="字符串搜索算法今天上数据结构只讲了搜索算法的最基本的一种，并且较优化的搜索算法也没怎么讲，来此研究一番。 字符串搜索算法的类型kmp算法 kmp算法简介：KMP算法是一种改进的字符串匹配算法，KMP算法的关键是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是实现一个next()函数，函数本身包含了模式串的局部匹配信息。时间复杂度O(m+n)。">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -108,128 +109,137 @@
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap">
-  
-  
+        <section id="main" class="body-wrap"><article id="post-字符串搜素算法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/10/11/字符串搜素算法/" class="archive-article-date">
-  <time datetime="2017-10-11T12:58:51.000Z" itemprop="datePublished">10-11</time>
-</a>
-      
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/11/字符串搜素算法/"  >字符串搜素算法</a>
+    <h1 class="post-title" itemprop="name">
+      字符串搜素算法
     </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2017-10-11
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
   
 
-    </header>
-      
-  </div>
-</article>
-
-  
+          
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/10/08/音乐调性/" class="archive-article-date">
-  <time datetime="2017-10-08T05:28:38.000Z" itemprop="datePublished">10-08</time>
-</a>
+    <div class="article-entry post-content" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/08/音乐调性/"  >音乐调性</a>
-    </h1>
-  
-
-    </header>
-      
-        <div class="archive-post-footer">
             
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/音乐/" class="color3">音乐</a>
-      
-    <a href="/tags/乐理/" class="color3">乐理</a>
-      
-  </li>
+            <h2 id="字符串搜索算法"><a href="#字符串搜索算法" class="headerlink" title="字符串搜索算法"></a>字符串搜索算法</h2><pre><code>今天上数据结构只讲了搜索算法的最基本的一种，并且较优化的搜索算法也没怎么讲，来此研究一番。
+</code></pre><h3 id="字符串搜索算法的类型"><a href="#字符串搜索算法的类型" class="headerlink" title="字符串搜索算法的类型"></a>字符串搜索算法的类型</h3><h4 id="kmp算法"><a href="#kmp算法" class="headerlink" title="kmp算法"></a>kmp算法</h4><ul>
+<li>kmp算法简介：KMP算法是一种改进的字符串匹配算法，KMP算法的关键是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是实现一个next()函数，函数本身包含了模式串的局部匹配信息。时间复杂度O(m+n)。</li>
+<li></li>
+</ul>
 
-        </div>
-      
-  </div>
-</article>
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2017年10月11日 21:13</p>
+        <p>原始链接： <a class="post-url" href="/2017/10/11/字符串搜素算法/" title="字符串搜素算法">http://YangHQ666.com/2017/10/11/字符串搜素算法/</a></p>
+        <footer>
+            <a href="http://YangHQ666.com">
+                <img src="/images/logo.png" alt="TonyYang">
+                TonyYang
+            </a>
+        </footer>
+    </div>
+</div>
 
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/10/06/YHQ/" class="archive-article-date">
-  <time datetime="2017-10-06T07:41:27.000Z" itemprop="datePublished">10-06</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/06/YHQ/"  >YHQ</a>
-    </h1>
-  
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://YangHQ666.com/2017/10/11/字符串搜素算法/&title=《字符串搜素算法》 — Welcome to TonyYang's Blog&pic=http://YangHQ666.comimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://YangHQ666.com/2017/10/11/字符串搜素算法/&title=《字符串搜素算法》 — Welcome to TonyYang's Blog&source=we have anything you want" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://YangHQ666.com/2017/10/11/字符串搜素算法/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《字符串搜素算法》 — Welcome to TonyYang's Blog&url=http://YangHQ666.com/2017/10/11/字符串搜素算法/&via=http://YangHQ666.com" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://YangHQ666.com/2017/10/11/字符串搜素算法/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://YangHQ666.com/2017/10/11/字符串搜素算法/" alt="微信分享二维码">
+</div>
 
-    </header>
-      
-        <div class="archive-post-footer">
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
             
-  <li class="article-footer-tags">
-    <i class="fa fa-tags"></i>
-      
-    <a href="/tags/你好，欢迎来到我的blog，这里应有尽有/" class="color1">你好，欢迎来到我的blog，这里应有尽有</a>
-      
-  </li>
-
-        </div>
-      
+            
+        </ul>
+        
+    </footer>
   </div>
 </article>
 
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/10/06/hello-world/" class="archive-article-date">
-  <time datetime="2017-10-06T06:41:50.000Z" itemprop="datePublished">10-06</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/06/hello-world/"  >Hello World</a>
-    </h1>
-  
 
-    </header>
-      
-  </div>
-</article>
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#字符串搜索算法"><span class="post-toc-text">字符串搜索算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字符串搜索算法的类型"><span class="post-toc-text">字符串搜索算法的类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#kmp算法"><span class="post-toc-text">kmp算法</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
 
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/10/08/音乐调性/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">音乐调性</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
   
+</nav>
+
+
+
+    
 
 </section>
         
