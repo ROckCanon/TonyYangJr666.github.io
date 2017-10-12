@@ -17,7 +17,7 @@
 <meta property="og:description" content="字符串搜索算法今天上数据结构只讲了搜索算法的最基本的一种，并且较优化的搜索算法也没怎么讲，来此研究一番。 kmp算法kmp算法简介KMP算法是一种改进的字符串匹配算法，KMP算法的关键是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是实现一个next()函数，函数本身包含了模式串的局部匹配信息。时间复杂度O(m+n)。​         kmp算法理解  一般">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yanghq666.com/Users/tonystark/Desktop/20170207171916706.jpeg">
-<meta property="og:updated_time" content="2017-10-12T04:26:25.000Z">
+<meta property="og:updated_time" content="2017-10-12T04:48:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="字符搜素算法之KMP">
 <meta name="twitter:description" content="字符串搜索算法今天上数据结构只讲了搜索算法的最基本的一种，并且较优化的搜索算法也没怎么讲，来此研究一番。 kmp算法kmp算法简介KMP算法是一种改进的字符串匹配算法，KMP算法的关键是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是实现一个next()函数，函数本身包含了模式串的局部匹配信息。时间复杂度O(m+n)。​         kmp算法理解  一般">
@@ -154,7 +154,7 @@
 <ul>
 <li><p>在此之前先推荐一篇文章<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth–Morris–Pratt_algorithm.html" target="_blank" rel="external">阮一峰讲解的KMP</a></p>
 <p>看完推荐的blog，他提到一个公式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">移动位数 = 已匹配的字符数 - 对应的部分匹配值</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">移动位数 = 已匹配的字符数 - 对应的部分匹配值</div></pre></td></tr></table></figure>
 <p>关于对应的部分匹配值，首先还是先要了解一下什么是前缀和后缀，我也引用他举的例子</p>
 <pre><code>字符串 ： “bread”
 前缀 ：b，br，bre，brea
@@ -182,14 +182,12 @@
 <p>bacbababadababacambabacaddababacasdsd</p>
 <p>ababaca</p>
 <p>a和b不相等，跳到下一个字符，运行2次后发现第三个不相等……..直到出现下面情况时：</p>
-<p>bacb<strong>ababad</strong>ababacambabacaddababacasdsd</p>
-<p>​         ababaca</p>
+<p>bacb<strong>ababad</strong>ababacambabacaddababacasdsd<br>&emsp; &emsp; ababaca</p>
 <p>这时候比较到ptr的第6个元素与str不相等时，程序进行下一次移位，但这次移位就要根据公示来移动：</p>
 <p>  移动位数 = 已匹配的字符数 - 对应的部分匹配值</p>
 <p>​                               5  （ababa）               -              3（aba）</p>
 <p>=2位；所以下一次移位：</p>
-<p>bacbabab<strong>adababa</strong>cambabacaddababacasdsd</p>
-<p>​                  ababaca；</p>
+<p>bacbabab<strong>adababa</strong>cambabacaddababacasdsd<br>&emsp; &emsp; &emsp; &emsp; ababaca；</p>
 <h4 id="对公式的理解"><a href="#对公式的理解" class="headerlink" title="对公式的理解"></a>对公式的理解</h4><p>其实从实例来看，之所以要减去对应的部分匹配值，是减去了前缀和后缀所重复的部分，在目标字符串str与子字符串ptr有相同部分的情况下，（1个相同而其他不同的直接转到下一个字符），在相同部分中减去了前缀和后缀所重复的部分，这样程序就可以跳过那些确定不能匹配的字符，从而减小时间复杂度（最后附上一张图）</p>
 <p><img src="/Users/tonystark/Desktop/20170207171916706.jpeg" alt="20170207171916706"></p>
 <p>（如果1=2=3=4，就直接把3移到4的位置 ：）</p>
@@ -197,7 +195,7 @@
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2017年10月12日 12:26</p>
+        <p>最后更新： 2017年10月12日 12:48</p>
         <p>原始链接： <a class="post-url" href="/2017/10/11/字符串搜素算法/" title="字符搜素算法之KMP">http://YangHQ666.com/2017/10/11/字符串搜素算法/</a></p>
         <footer>
             <a href="http://YangHQ666.com">
