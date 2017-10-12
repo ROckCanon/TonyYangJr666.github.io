@@ -3,22 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>字符串搜素算法 | Welcome to TonyYang&#39;s Blog</title>
+  <title>字符搜素算法之KMP | Welcome to TonyYang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="TonyYang,TonyYang's Blog" />
   
-  <meta name="description" content="字符串搜索算法今天上数据结构只讲了搜索算法的最基本的一种，并且较优化的搜索算法也没怎么讲，来此研究一番。 字符串搜索算法的类型kmp算法 kmp算法简介：KMP算法是一种改进的字符串匹配算法，KMP算法的关键是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是实现一个next()函数，函数本身包含了模式串的局部匹配信息。时间复杂度O(m+n)。">
+  <meta name="description" content="字符串搜索算法今天上数据结构只讲了搜索算法的最基本的一种，并且较优化的搜索算法也没怎么讲，来此研究一番。 kmp算法kmp算法简介KMP算法是一种改进的字符串匹配算法，KMP算法的关键是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是实现一个next()函数，函数本身包含了模式串的局部匹配信息。时间复杂度O(m+n)。​         kmp算法理解  一般">
+<meta name="keywords" content="搜索算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="字符串搜素算法">
+<meta property="og:title" content="字符搜素算法之KMP">
 <meta property="og:url" content="http://YangHQ666.com/2017/10/11/字符串搜素算法/index.html">
 <meta property="og:site_name" content="Welcome to TonyYang&#39;s Blog">
-<meta property="og:description" content="字符串搜索算法今天上数据结构只讲了搜索算法的最基本的一种，并且较优化的搜索算法也没怎么讲，来此研究一番。 字符串搜索算法的类型kmp算法 kmp算法简介：KMP算法是一种改进的字符串匹配算法，KMP算法的关键是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是实现一个next()函数，函数本身包含了模式串的局部匹配信息。时间复杂度O(m+n)。">
+<meta property="og:description" content="字符串搜索算法今天上数据结构只讲了搜索算法的最基本的一种，并且较优化的搜索算法也没怎么讲，来此研究一番。 kmp算法kmp算法简介KMP算法是一种改进的字符串匹配算法，KMP算法的关键是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是实现一个next()函数，函数本身包含了模式串的局部匹配信息。时间复杂度O(m+n)。​         kmp算法理解  一般">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-10-11T13:13:52.000Z">
+<meta property="og:image" content="http://yanghq666.com/Users/tonystark/Desktop/20170207171916706.jpeg">
+<meta property="og:updated_time" content="2017-10-12T04:26:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="字符串搜素算法">
-<meta name="twitter:description" content="字符串搜索算法今天上数据结构只讲了搜索算法的最基本的一种，并且较优化的搜索算法也没怎么讲，来此研究一番。 字符串搜索算法的类型kmp算法 kmp算法简介：KMP算法是一种改进的字符串匹配算法，KMP算法的关键是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是实现一个next()函数，函数本身包含了模式串的局部匹配信息。时间复杂度O(m+n)。">
+<meta name="twitter:title" content="字符搜素算法之KMP">
+<meta name="twitter:description" content="字符串搜索算法今天上数据结构只讲了搜索算法的最基本的一种，并且较优化的搜索算法也没怎么讲，来此研究一番。 kmp算法kmp算法简介KMP算法是一种改进的字符串匹配算法，KMP算法的关键是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是实现一个next()函数，函数本身包含了模式串的局部匹配信息。时间复杂度O(m+n)。​         kmp算法理解  一般">
+<meta name="twitter:image" content="http://yanghq666.com/Users/tonystark/Desktop/20170207171916706.jpeg">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -116,10 +119,17 @@
         
   
     <h1 class="post-title" itemprop="name">
-      字符串搜素算法
+      字符搜素算法之KMP
     </h1>
     <div class="post-title-bar">
       <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/算法/">算法</a>
+                  
+              </li>
           
         <li>
           <i class="fa fa-calendar"></i>  2017-10-11
@@ -139,15 +149,56 @@
       
             
             <h2 id="字符串搜索算法"><a href="#字符串搜索算法" class="headerlink" title="字符串搜索算法"></a>字符串搜索算法</h2><pre><code>今天上数据结构只讲了搜索算法的最基本的一种，并且较优化的搜索算法也没怎么讲，来此研究一番。
-</code></pre><h3 id="字符串搜索算法的类型"><a href="#字符串搜索算法的类型" class="headerlink" title="字符串搜索算法的类型"></a>字符串搜索算法的类型</h3><h4 id="kmp算法"><a href="#kmp算法" class="headerlink" title="kmp算法"></a>kmp算法</h4><ul>
-<li>kmp算法简介：KMP算法是一种改进的字符串匹配算法，KMP算法的关键是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是实现一个next()函数，函数本身包含了模式串的局部匹配信息。时间复杂度O(m+n)。</li>
-<li></li>
+</code></pre><h3 id="kmp算法"><a href="#kmp算法" class="headerlink" title="kmp算法"></a>kmp算法</h3><h4 id="kmp算法简介"><a href="#kmp算法简介" class="headerlink" title="kmp算法简介"></a>kmp算法简介</h4><p>KMP算法是一种改进的字符串匹配算法，KMP算法的关键是利用匹配失败后的信息，尽量减少模式串与主串的匹配次数以达到快速匹配的目的。具体实现就是实现一个next()函数，函数本身包含了模式串的局部匹配信息。时间复杂度O(m+n)。<br>​        </p>
+<h4 id="kmp算法理解"><a href="#kmp算法理解" class="headerlink" title="kmp算法理解"></a>kmp算法理解</h4><p>  一般匹配字符串时，我们从目标字符串str（假设长度为n）的第一个下标选取和ptr长度（长度为m）一样的子字符串进行比较，如果一样，就返回开始处的下标值，不一样，选取str下一个下标，同样选取长度为n的字符串进行比较，直到str的末尾（实际比较时，下标移动到n-m）。这样的时间复杂度是O(n*m)。</p>
+<ul>
+<li><p>在此之前先推荐一篇文章<a href="http://www.ruanyifeng.com/blog/2013/05/Knuth–Morris–Pratt_algorithm.html" target="_blank" rel="external">阮一峰讲解的KMP</a></p>
+<p>看完推荐的blog，他提到一个公式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">移动位数 = 已匹配的字符数 - 对应的部分匹配值</div></pre></td></tr></table></figure>
+<p>关于对应的部分匹配值，首先还是先要了解一下什么是前缀和后缀，我也引用他举的例子</p>
+<pre><code>字符串 ： “bread”
+前缀 ：b，br，bre，brea
+后缀：read，ead，ad，d
+</code></pre><p> 因此<br> 最长前缀：是说以第一个字符开始，但是不包含最后一个字符。比如：</p>
+</li>
+<li><p>abcjkdabc，那么这个数组的最长前缀和最长后缀相同必然是abc。</p>
+</li>
+<li><p>cbcbc，最长前缀和最长后缀相同是cbc。</p>
+</li>
+<li><p>abcbc，最长前缀和最长后缀相同是不存在的。</p>
+<hr>
+<p> ​</p>
+<p> 了解这些以后，我们在来说公式当中的 <code>对应的部分匹配值</code>   ；</p>
+<p> <strong>部分匹配值为“最长前缀”和“最长后缀”的共有元素的长度 </strong></p>
+<p> 例如：</p>
+<p> 搜索词为：ababaca，其中从左到右数的第三个a的部分匹配值为：3；因为它的最长前缀是abab，最长后缀也是baba；所以共有的是aba。</p>
+<p> ​</p>
+</li>
 </ul>
+<h4 id="实例应用"><a href="#实例应用" class="headerlink" title="实例应用"></a>实例应用</h4><pre><code>给你两个字符串，寻找其中一个字符串是否包含另一个字符串，如果包含，返回包含的起始位置。 
+</code></pre><p>如下面两个字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">char *str = &quot;bacbababadababacambabacaddababacasdsd&quot;;</div><div class="line">char *ptr = &quot;ababaca&quot;;</div></pre></td></tr></table></figure>
+<p>第一次：</p>
+<p>bacbababadababacambabacaddababacasdsd</p>
+<p>ababaca</p>
+<p>a和b不相等，跳到下一个字符，运行2次后发现第三个不相等……..直到出现下面情况时：</p>
+<p>bacb<strong>ababad</strong>ababacambabacaddababacasdsd</p>
+<p>​         ababaca</p>
+<p>这时候比较到ptr的第6个元素与str不相等时，程序进行下一次移位，但这次移位就要根据公示来移动：</p>
+<p>  移动位数 = 已匹配的字符数 - 对应的部分匹配值</p>
+<p>​                               5  （ababa）               -              3（aba）</p>
+<p>=2位；所以下一次移位：</p>
+<p>bacbabab<strong>adababa</strong>cambabacaddababacasdsd</p>
+<p>​                  ababaca；</p>
+<h4 id="对公式的理解"><a href="#对公式的理解" class="headerlink" title="对公式的理解"></a>对公式的理解</h4><p>其实从实例来看，之所以要减去对应的部分匹配值，是减去了前缀和后缀所重复的部分，在目标字符串str与子字符串ptr有相同部分的情况下，（1个相同而其他不同的直接转到下一个字符），在相同部分中减去了前缀和后缀所重复的部分，这样程序就可以跳过那些确定不能匹配的字符，从而减小时间复杂度（最后附上一张图）</p>
+<p><img src="/Users/tonystark/Desktop/20170207171916706.jpeg" alt="20170207171916706"></p>
+<p>（如果1=2=3=4，就直接把3移到4的位置 ：）</p>
+<p>（完）</p>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2017年10月11日 21:13</p>
-        <p>原始链接： <a class="post-url" href="/2017/10/11/字符串搜素算法/" title="字符串搜素算法">http://YangHQ666.com/2017/10/11/字符串搜素算法/</a></p>
+        <p>最后更新： 2017年10月12日 12:26</p>
+        <p>原始链接： <a class="post-url" href="/2017/10/11/字符串搜素算法/" title="字符搜素算法之KMP">http://YangHQ666.com/2017/10/11/字符串搜素算法/</a></p>
         <footer>
             <a href="http://YangHQ666.com">
                 <img src="/images/logo.png" alt="TonyYang">
@@ -169,7 +220,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://YangHQ666.com/2017/10/11/字符串搜素算法/&title=《字符串搜素算法》 — Welcome to TonyYang's Blog&pic=http://YangHQ666.comimages/logo.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://YangHQ666.com/2017/10/11/字符串搜素算法/&title=《字符搜素算法之KMP》 — Welcome to TonyYang's Blog&pic=http://YangHQ666.comimages/logo.png" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -179,7 +230,7 @@
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://YangHQ666.com/2017/10/11/字符串搜素算法/&title=《字符串搜素算法》 — Welcome to TonyYang's Blog&source=we have anything you want" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://YangHQ666.com/2017/10/11/字符串搜素算法/&title=《字符搜素算法之KMP》 — Welcome to TonyYang's Blog&source=we have anything you want" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
@@ -189,7 +240,7 @@
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《字符串搜素算法》 — Welcome to TonyYang's Blog&url=http://YangHQ666.com/2017/10/11/字符串搜素算法/&via=http://YangHQ666.com" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《字符搜素算法之KMP》 — Welcome to TonyYang's Blog&url=http://YangHQ666.com/2017/10/11/字符串搜素算法/&via=http://YangHQ666.com" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -213,6 +264,13 @@
         <ul class="article-footer-menu">
             
             
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/搜索算法/" class="color5">搜索算法</a>
+      
+  </li>
+
         </ul>
         
     </footer>
@@ -222,7 +280,7 @@
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#字符串搜索算法"><span class="post-toc-text">字符串搜索算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字符串搜索算法的类型"><span class="post-toc-text">字符串搜索算法的类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#kmp算法"><span class="post-toc-text">kmp算法</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#字符串搜索算法"><span class="post-toc-text">字符串搜索算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#kmp算法"><span class="post-toc-text">kmp算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#kmp算法简介"><span class="post-toc-text">kmp算法简介</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#kmp算法理解"><span class="post-toc-text">kmp算法理解</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实例应用"><span class="post-toc-text">实例应用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#对公式的理解"><span class="post-toc-text">对公式的理解</span></a></li></ol></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -230,8 +288,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2017/10/08/音乐调性/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">音乐调性</span>
+    <a href="/2017/10/08/UItableView使用方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">UItableView使用方法</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
@@ -293,10 +351,10 @@
 <div class="sidebar-menu-box" id="sidebar-menu-box">
     <div class="sidebar-menu-box-container">
         <div id="sidebar-menu-box-categories">
-            <a class="category-link" href="/categories/音乐/">音乐</a>
+            <a class="category-link" href="/categories/UI设计/">UI设计</a><a class="category-link" href="/categories/算法/">算法</a><a class="category-link" href="/categories/音乐/">音乐</a>
         </div>
         <div id="sidebar-menu-box-tags">
-            <a href="/tags/乐理/" style="font-size: 10px;">乐理</a> <a href="/tags/你好，欢迎来到我的blog，这里应有尽有/" style="font-size: 10px;">你好，欢迎来到我的blog，这里应有尽有</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+            <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/iOS开发/" style="font-size: 10px;">iOS开发</a> <a href="/tags/乐理/" style="font-size: 10px;">乐理</a> <a href="/tags/你好，欢迎来到我的blog，这里应有尽有/" style="font-size: 10px;">你好，欢迎来到我的blog，这里应有尽有</a> <a href="/tags/搜索算法/" style="font-size: 10px;">搜索算法</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
         </div>
     </div>
     <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
@@ -329,7 +387,7 @@
     <div class="mobile-header-tag-container">
         <span class="title">Tags</span>
         <div id="mobile-header-container-tags">
-            <a href="/tags/乐理/" style="font-size: 10px;">乐理</a> <a href="/tags/你好，欢迎来到我的blog，这里应有尽有/" style="font-size: 10px;">你好，欢迎来到我的blog，这里应有尽有</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+            <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/iOS开发/" style="font-size: 10px;">iOS开发</a> <a href="/tags/乐理/" style="font-size: 10px;">乐理</a> <a href="/tags/你好，欢迎来到我的blog，这里应有尽有/" style="font-size: 10px;">你好，欢迎来到我的blog，这里应有尽有</a> <a href="/tags/搜索算法/" style="font-size: 10px;">搜索算法</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
         </div>
     </div>
 </div>
