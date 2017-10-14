@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>几个模糊知识点的重学和回顾（一） | Welcome to TonyYang&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="TonyYang,TonyYang's Blog" />
+  
+  <meta name="description" content="几个模糊知识点的重学和回顾（一）OC中关于id和instancetype的区别 相同点：  id和instancetype都可以作为方法的返回值。  不同点：  id可以用来定义变量，可以作为返回值类型，可以作为形参类型；instancetype只能作为返回值类型 。    instancetype 可以返回和方法所在类相同类型的对象，id只能返回未知类型的对象。例如：(id类型时候)  1234">
+<meta property="og:type" content="article">
+<meta property="og:title" content="几个模糊知识点的重学和回顾（一）">
+<meta property="og:url" content="http://YangHQ666.com/2017/10/14/几个模糊知识点的重学和回顾（一）/index.html">
+<meta property="og:site_name" content="Welcome to TonyYang&#39;s Blog">
+<meta property="og:description" content="几个模糊知识点的重学和回顾（一）OC中关于id和instancetype的区别 相同点：  id和instancetype都可以作为方法的返回值。  不同点：  id可以用来定义变量，可以作为返回值类型，可以作为形参类型；instancetype只能作为返回值类型 。    instancetype 可以返回和方法所在类相同类型的对象，id只能返回未知类型的对象。例如：(id类型时候)  1234">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yanghq666.com/2017/10/14/几个模糊知识点的重学和回顾（一）/strongAndweak.png">
+<meta property="og:updated_time" content="2017-10-14T05:23:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="几个模糊知识点的重学和回顾（一）">
+<meta name="twitter:description" content="几个模糊知识点的重学和回顾（一）OC中关于id和instancetype的区别 相同点：  id和instancetype都可以作为方法的返回值。  不同点：  id可以用来定义变量，可以作为返回值类型，可以作为形参类型；instancetype只能作为返回值类型 。    instancetype 可以返回和方法所在类相同类型的对象，id只能返回未知类型的对象。例如：(id类型时候)  1234">
+<meta name="twitter:image" content="http://yanghq666.com/2017/10/14/几个模糊知识点的重学和回顾（一）/strongAndweak.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">TonyYang&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        TonyYang&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        不积小流无以成江海
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="TonyYang" target="_blank" href="//TonyYang666.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/TonyYang666">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//weibo.com/18163308135">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Qq" target="_blank" href="https://user.qzone.qq.com/965807531/infocenter">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-几个模糊知识点的重学和回顾（一）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      几个模糊知识点的重学和回顾（一）
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2017-10-14
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h2 id="几个模糊知识点的重学和回顾（一）"><a href="#几个模糊知识点的重学和回顾（一）" class="headerlink" title="几个模糊知识点的重学和回顾（一）"></a>几个模糊知识点的重学和回顾（一）</h2><h3 id="OC中关于id和instancetype的区别"><a href="#OC中关于id和instancetype的区别" class="headerlink" title="OC中关于id和instancetype的区别"></a>OC中关于id和instancetype的区别</h3><ul>
+<li>相同点：</li>
+</ul>
+<p>id和instancetype都可以作为方法的返回值。</p>
+<ul>
+<li><p>不同点：</p>
+</li>
+<li><p>id可以用来定义变量，可以作为返回值类型，可以作为形参类型；instancetype只能作为返回值类型 。</p>
+</li>
+</ul>
+<ul>
+<li>instancetype 可以返回和方法所在类相同类型的对象，id只能返回未知类型的对象。例如：(id类型时候)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@interface NSArray</div><div class="line"></div><div class="line">+(id)constructAnArray;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">当我们初始化的时候</div><div class="line"></div><div class="line">[NSArray constructAnArray]</div><div class="line"></div><div class="line">得到返回类型和方法声明的返回类型一样，是id</div></pre></td></tr></table></figure>
+<p>（instancetype的时候）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">如果使用 instancetype 作为返回类型</div><div class="line"></div><div class="line">@interface NSArray</div><div class="line"></div><div class="line">+(instancetype)constructAnArray;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">同样方式初始化</div><div class="line"></div><div class="line">[NSArray constructAnArray]</div><div class="line"></div><div class="line">得到的返回类型和方法所在类型相同，是 NSArray *</div></pre></td></tr></table></figure>
+<p>以后凡是自定义构造方法，返回值类型尽量使用instancetype，不要使用id  。</p>
+<h3 id="OC中的深拷贝和浅拷贝"><a href="#OC中的深拷贝和浅拷贝" class="headerlink" title="OC中的深拷贝和浅拷贝"></a>OC中的深拷贝和浅拷贝</h3><h4 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h4><p>简单点说浅拷贝就是对内存地址的复制，让目标对象指针和源对象指针指向同一片内存空间。如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">char *str = (char *)malloc(100);</div><div class="line">char *str2 = str;</div></pre></td></tr></table></figure>
+<h4 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h4><p>深拷贝就是拷贝地址中的内容，让目标对象产生<code>新的内存区域</code>，且将源内存区域中的内容复制到目标内存区域中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">char *str = (char *)malloc(20);</div><div class="line">strcpy(str, &quot;hello world&quot;);</div><div class="line"></div><div class="line">//复制</div><div class="line">char *str2 = (char *)malloc(20);</div><div class="line">strcpy(str2, str);</div></pre></td></tr></table></figure>
+<p>深拷贝就是产生一个新的对象，将源对象的所有内容拷贝到新的对象中，新对象和源对象各自指向自己的内存区域，相互之间不受影响。</p>
+<p>这里有一篇讲的比较好的<a href="http://www.jianshu.com/p/f01d490401f9" target="_blank" rel="external">博客</a></p>
+<h3 id="OC中的strong和weak修饰符的使用"><a href="#OC中的strong和weak修饰符的使用" class="headerlink" title="OC中的strong和weak修饰符的使用"></a>OC中的strong和weak修饰符的使用</h3><h4 id="strong和weak修饰符的简单理解："><a href="#strong和weak修饰符的简单理解：" class="headerlink" title="strong和weak修饰符的简单理解："></a>strong和weak修饰符的简单理解：</h4><p>​    首先一个对象可以有多个拥有者，即A和B两个strong的指针同时指向一个NSString的对象“hello”，当A和B两个strong的指针同时指向一个NSString的对象“hello”，当A指向另一个NSString对象“hi”时，此时B仍指向“hello”，当B也指向“hi”或其他任何一个对象时，“hello”这个对象就会在内存中被删除。</p>
+<p>​    如果B是一个weak类型的指针，则当strong类型的A指针指向其他对象时，因为B是一个weak类型的指针，此时B没有指向。<br>​    </p>
+<blockquote>
+<p>总结：一旦最后一个指向该对象的strong类型的指针离开，这个对象将被释放，如果这个时候还有weak指针指向该对象，则会清除掉所有剩余的weak指针</p>
+</blockquote>
+<h4 id="对于weak指针的理解："><a href="#对于weak指针的理解：" class="headerlink" title="对于weak指针的理解："></a>对于weak指针的理解：</h4><p>​    weak指针主要用于“父-子”关系，父亲拥有一个儿子的strong指针，因此父亲是儿子的所有者；但为了阻止所有权循环,儿子需要使用weak指针指向父亲 </p>
+<p>​    典型例子是delegate模式,你的ViewController通过strong指针（self.view）拥有一个UITableView, UITableView的dataSource和delegate都是weak指针,指向你的ViewController </p>
+<p><img src="/2017/10/14/几个模糊知识点的重学和回顾（一）/strongAndweak.png" alt=""></p>
+<h4 id="弱指针Weak"><a href="#弱指针Weak" class="headerlink" title="弱指针Weak:"></a>弱指针Weak:</h4><p>​    在使用 sb 或者 xib 给控件拖线的时候,为什么拖出来的先属性都是用 weak 修饰呢?<br>​    eg</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (weak, nonatomic) IBOutlet UILabel *label;</div></pre></td></tr></table></figure>
+<p>​    原因是由于在向 xib 或者 sb 里面添加控件的时候,添加的子视图是添加到了跟视图 View 上面, 而 控制器 Controller 对其根视图 View 默认是强引用的,当我们的子控件添加到 view 上面的时候, self.view addSubView: 这个方法会对添加的控件进行强引用,如果在用 strong 对添加的子控件进行修饰的话,相当于有两条强指针对子控件进行强引用, 为了避免这种情况,所以用 weak 修饰.</p>
+<blockquote>
+<p>注意:</p>
+<p>​ 1. addSubView 默认对其 subView 进行了强引用<br>​    2.在纯手码实现界面布局时，如果通过懒加载处理界面控件，需要使用strong强指针<br>​    除此之外,我们在开发的时候用的代理 也是用 weak 进行修饰的,其目的是为了防止控件的循环引用.​<br>​    @property (nonatomic, weak) id<persondelegate> delegate;</persondelegate></p>
+</blockquote>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2017年10月14日 13:23</p>
+        <p>原始链接： <a class="post-url" href="/2017/10/14/几个模糊知识点的重学和回顾（一）/" title="几个模糊知识点的重学和回顾（一）">http://YangHQ666.com/2017/10/14/几个模糊知识点的重学和回顾（一）/</a></p>
+        <footer>
+            <a href="http://YangHQ666.com">
+                <img src="/images/logo.png" alt="TonyYang">
+                TonyYang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://YangHQ666.com/2017/10/14/几个模糊知识点的重学和回顾（一）/&title=《几个模糊知识点的重学和回顾（一）》 — Welcome to TonyYang's Blog&pic=http://YangHQ666.comimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://YangHQ666.com/2017/10/14/几个模糊知识点的重学和回顾（一）/&title=《几个模糊知识点的重学和回顾（一）》 — Welcome to TonyYang's Blog&source=we have anything you want" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://YangHQ666.com/2017/10/14/几个模糊知识点的重学和回顾（一）/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《几个模糊知识点的重学和回顾（一）》 — Welcome to TonyYang's Blog&url=http://YangHQ666.com/2017/10/14/几个模糊知识点的重学和回顾（一）/&via=http://YangHQ666.com" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://YangHQ666.com/2017/10/14/几个模糊知识点的重学和回顾（一）/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://YangHQ666.com/2017/10/14/几个模糊知识点的重学和回顾（一）/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#几个模糊知识点的重学和回顾（一）"><span class="post-toc-text">几个模糊知识点的重学和回顾（一）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#OC中关于id和instancetype的区别"><span class="post-toc-text">OC中关于id和instancetype的区别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#OC中的深拷贝和浅拷贝"><span class="post-toc-text">OC中的深拷贝和浅拷贝</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#浅拷贝"><span class="post-toc-text">浅拷贝</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#深拷贝"><span class="post-toc-text">深拷贝</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#OC中的strong和weak修饰符的使用"><span class="post-toc-text">OC中的strong和weak修饰符的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#strong和weak修饰符的简单理解："><span class="post-toc-text">strong和weak修饰符的简单理解：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#对于weak指针的理解："><span class="post-toc-text">对于weak指针的理解：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#弱指针Weak"><span class="post-toc-text">弱指针Weak:</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/11/字符串搜素算法/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">字符搜素算法之KMP</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2017 TonyYang<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://YangHQ666.com",
+      animate: true,
+      isHome: false,
+      share: true
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/UI设计/">UI设计</a><a class="category-link" href="/categories/算法/">算法</a><a class="category-link" href="/categories/音乐/">音乐</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/iOS开发/" style="font-size: 10px;">iOS开发</a> <a href="/tags/乐理/" style="font-size: 10px;">乐理</a> <a href="/tags/你好，欢迎来到我的blog，这里应有尽有/" style="font-size: 10px;">你好，欢迎来到我的blog，这里应有尽有</a> <a href="/tags/搜索算法/" style="font-size: 10px;">搜索算法</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/iOS开发/" style="font-size: 10px;">iOS开发</a> <a href="/tags/乐理/" style="font-size: 10px;">乐理</a> <a href="/tags/你好，欢迎来到我的blog，这里应有尽有/" style="font-size: 10px;">你好，欢迎来到我的blog，这里应有尽有</a> <a href="/tags/搜索算法/" style="font-size: 10px;">搜索算法</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+</body>
+</html>
