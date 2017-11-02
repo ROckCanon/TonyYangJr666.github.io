@@ -3,25 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>音乐调性 | Welcome to TonyYang&#39;s Blog</title>
+  <title>C语言之内存管理 | Welcome to TonyYang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="TonyYang,TonyYang's Blog" />
   
-  <meta name="description" content="我们生活中经常会听说这首歌是什么C调什么D调，你知道调是怎么规定的吗？ 基本概念调性（Tonality）是调的主音和调式类别的总称，例如，以C为主音的大调式，其调性即是“C大调”，以a为主音的小调式，其调性就是“a小调”等。以此类推，一般音乐中主要有24个调性。首先就拿大家比较熟悉的C大调开始说起。 关于C大调不同音之间是有距离的，十二平均律将一个八度音程（12345671）分为12等份，每等份称">
-<meta name="keywords" content="音乐,乐理">
+  <meta name="description" content="C语言之内存管理 有效的分配内存资源是程序设计中首要考虑的问题，由于之前对内存管理方面了解的不是很多，现在深入了解一下  内存中的五大区域先上一幅图：  栈：又称为堆栈，存放程序临时创建的局部变量，当局部变量的作用域被执行完毕之后，这个局部变量就会被系统立即回收。除此以外函数被调用时候，参数也会被压入发起调用的进程栈中，并且待到调用结束后，函数的返回值也会被存放回栈中，由于栈的先进先出特点，所以栈">
+<meta name="keywords" content="C语言,内存管理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="音乐调性">
-<meta property="og:url" content="http://YangHQ666.com/2017/10/08/音乐调性/index.html">
+<meta property="og:title" content="C语言之内存管理">
+<meta property="og:url" content="http://YangHQ666.com/2017/11/02/C语言之内存管理/index.html">
 <meta property="og:site_name" content="Welcome to TonyYang&#39;s Blog">
-<meta property="og:description" content="我们生活中经常会听说这首歌是什么C调什么D调，你知道调是怎么规定的吗？ 基本概念调性（Tonality）是调的主音和调式类别的总称，例如，以C为主音的大调式，其调性即是“C大调”，以a为主音的小调式，其调性就是“a小调”等。以此类推，一般音乐中主要有24个调性。首先就拿大家比较熟悉的C大调开始说起。 关于C大调不同音之间是有距离的，十二平均律将一个八度音程（12345671）分为12等份，每等份称">
+<meta property="og:description" content="C语言之内存管理 有效的分配内存资源是程序设计中首要考虑的问题，由于之前对内存管理方面了解的不是很多，现在深入了解一下  内存中的五大区域先上一幅图：  栈：又称为堆栈，存放程序临时创建的局部变量，当局部变量的作用域被执行完毕之后，这个局部变量就会被系统立即回收。除此以外函数被调用时候，参数也会被压入发起调用的进程栈中，并且待到调用结束后，函数的返回值也会被存放回栈中，由于栈的先进先出特点，所以栈">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yanghq666.com/2017/10/08/音乐调性/音乐调性.png">
-<meta property="og:updated_time" content="2017-10-12T06:24:18.000Z">
+<meta property="og:image" content="http://yanghq666.com/2017/11/02/C语言之内存管理/内存管理.jpeg">
+<meta property="og:updated_time" content="2017-11-02T14:31:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="音乐调性">
-<meta name="twitter:description" content="我们生活中经常会听说这首歌是什么C调什么D调，你知道调是怎么规定的吗？ 基本概念调性（Tonality）是调的主音和调式类别的总称，例如，以C为主音的大调式，其调性即是“C大调”，以a为主音的小调式，其调性就是“a小调”等。以此类推，一般音乐中主要有24个调性。首先就拿大家比较熟悉的C大调开始说起。 关于C大调不同音之间是有距离的，十二平均律将一个八度音程（12345671）分为12等份，每等份称">
-<meta name="twitter:image" content="http://yanghq666.com/2017/10/08/音乐调性/音乐调性.png">
+<meta name="twitter:title" content="C语言之内存管理">
+<meta name="twitter:description" content="C语言之内存管理 有效的分配内存资源是程序设计中首要考虑的问题，由于之前对内存管理方面了解的不是很多，现在深入了解一下  内存中的五大区域先上一幅图：  栈：又称为堆栈，存放程序临时创建的局部变量，当局部变量的作用域被执行完毕之后，这个局部变量就会被系统立即回收。除此以外函数被调用时候，参数也会被压入发起调用的进程栈中，并且待到调用结束后，函数的返回值也会被存放回栈中，由于栈的先进先出特点，所以栈">
+<meta name="twitter:image" content="http://yanghq666.com/2017/11/02/C语言之内存管理/内存管理.jpeg">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -112,14 +112,14 @@
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-音乐调性" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-C语言之内存管理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      音乐调性
+      C语言之内存管理
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -127,12 +127,12 @@
               <li>
                   <i class="fa fa-book"></i>
                   
-                      <a href="/categories/音乐/">音乐</a>
+                      <a href="/categories/C语言/">C语言</a>
                   
               </li>
           
         <li>
-          <i class="fa fa-calendar"></i>  2017-10-08
+          <i class="fa fa-calendar"></i>  2017-11-02
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -148,27 +148,28 @@
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <p>我们生活中经常会听说这首歌是什么C调什么D调，你知道调是怎么规定的吗？</p>
-<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>调性（Tonality）是调的主音和调式类别的总称，例如，以C为主音的大调式，其调性即是“C大调”，以a为主音的小调式，其调性就是“a小调”等。以此类推，一般音乐中主要有24个调性。首先就拿大家比较熟悉的C大调开始说起。</p>
-<h3 id="关于C大调"><a href="#关于C大调" class="headerlink" title="关于C大调"></a>关于C大调</h3><p>不同音之间是有距离的，十二平均律将一个八度音程（12345671）分为12等份，每等份称为一个半音，两个半音距离构成一个全音。在一个标准音阶中，除了3-4、7-1之间是半音的距离，其他的相邻两个音之间都是全音的距离。也就是说，他们之间还存在着一个半音距离的音符（如1-2之间有一个1#=2b），加上1#、2#、4#、5#、6#，正好为12等份（不包含最后一个Do），如下图所示。<br><img src="/2017/10/08/音乐调性/音乐调性.png" alt=""><br>而C大调音阶，就是以C音为1，CDEFGAB的相邻音符距离恰恰和标准音阶1234567的距离一致（全全半全全全半，不用升降号）。因此，C大调是最自然的大调，也是最基础的调。</p>
-<h3 id="唱名和音名"><a href="#唱名和音名" class="headerlink" title="唱名和音名"></a>唱名和音名</h3><ul>
-<li><p>唱名：1234567，在简谱首调中出现，没有绝对音高，多用于流行乐。任何人可以根据自己适应的音域从任意高度起唱1（do）。比如男生和女生唱同一段旋律，男生音高一般低于女生，但是由于音符之间的距离相同，我们知道他们唱的是同一首歌曲，可以用同一段简谱记录。</p>
-</li>
-<li><p>音名：CDEFGAB，指的是五线谱中固定调的绝对音高，多用于古典乐。比如标准音A，其频率为440Hz，音高是固定的，国际公认。交响乐团就是以绝对音高的方式，使得不同乐器能够协调统一。</p>
-</li>
-</ul>
-<p>由于唱名是不固定的，将唱名和固定音高建立起确定的关系，就产生了调。如以C音高度为起音1（do），就称为C大调，G=1，就是G大调。（这里科普一下C的标准音：每秒振动约261次的c音在乐音体系中叫中央c，它位于基本音级首位）</p>
-<h3 id="大调和小调"><a href="#大调和小调" class="headerlink" title="大调和小调"></a>大调和小调</h3><p>之所以要区分大小调，从感官上来讲，是因为乐曲的调式色彩不同。大调一般明朗开阔，小调一般柔和暗淡。那么为什么会产生这种听觉效果呢？源于它们具有不同的音阶结构。<br>大调：1   2   3-4   5   6   7-1<br>全  全 半 全 全 全 半<br>小调：6   7-1   2   3-4   5   6<br>全 半 全 全 半 全  全<br>要满足小调的音程关系，则用首调听起来，小调的起因就是6（la）。因此，D小调就可以简单理解为：以D音为6（la）的调。</p>
-<h3 id="怎样判断一首歌是什么调呢？"><a href="#怎样判断一首歌是什么调呢？" class="headerlink" title="怎样判断一首歌是什么调呢？"></a>怎样判断一首歌是什么调呢？</h3><p>在我们理解上面的概念以后，简而言之判断调性就是：do到底定多高”这么个问题。<br>决定一个有人声的歌曲的调性，肯定是以人声的音域为主要参考，所有乐器都应该是为人生服务的。乐器的音高系统会有影响，比如有首歌依照人声，我想定1=bB，但是伴奏有样乐器是C大调的，演奏不了bB这种音。那么看看人声能不能在1=C时候演唱好这首歌，能行就定成1=C，如果不行那咱们就换个乐器。至于曲风，可能影响比较小吧。可能有的曲风需要旋律线大起大落，音域宽阔，有的曲风旋律线可能比较平直。但我想来这跟定调没有太大的关系吧。（来自知乎大神的解答）</p>
-<blockquote>
-<p> 最后，还有一点：多听，多想</p>
+            <h2 id="C语言之内存管理"><a href="#C语言之内存管理" class="headerlink" title="C语言之内存管理"></a>C语言之内存管理</h2><blockquote>
+<p>有效的分配内存资源是程序设计中首要考虑的问题，由于之前对内存管理方面了解的不是很多，现在深入了解一下</p>
 </blockquote>
-<p>（完）</p>
+<h3 id="内存中的五大区域"><a href="#内存中的五大区域" class="headerlink" title="内存中的五大区域"></a>内存中的五大区域</h3><p>先上一幅图：<img src="/2017/11/02/C语言之内存管理/内存管理.jpeg" alt="内存管理"></p>
+<ul>
+<li>栈：又称为堆栈，存放程序临时创建的<strong>局部变量</strong>，当局部变量的作用域被执行完毕之后，这个局部变量就会被系统立即回收。除此以外函数被调用时候，参数也会被压入发起调用的进程栈中，并且待到调用结束后，函数的返回值也会被存放回栈中，由于栈的先进先出特点，所以栈特别方便用来保存/恢复调用现场。从这个意义上讲，我们可以把堆栈看成一个寄存、交换临时数据的内存区。<strong>注意：栈空间是向下增长的，每个线程有一个自己的栈，在linux上默认的大小是8M，可以用ulimit查看和修改。</strong></li>
+</ul>
+<ul>
+<li>堆：用于存放进程运行被<strong>动态分配的内存段</strong>（即调用malloc等函数分配内存时，新分配的内存就被动态添加到堆上；当利用free等函数释放内存时，被释放的内存从堆中被剔除）</li>
+</ul>
+<ul>
+<li>BBS段：通常是指用来存放程序中<strong>未初始化的</strong> <strong>全局变量</strong>和<strong>静态变量</strong>（static）的一块内存区域，BBS的全称是<em>Block Started by Symbol</em>的简称BSS段属于静态内存分配。 BSS节不包含任何数据，只是简单的维护开始和结束的地址，即总大小，以便内存区能在运行时分配并被有效地清零，也就是说：<strong>全局变量</strong>和<strong>静态变量</strong>一旦初始化后就回收，并转存到<strong>数据段</strong>中。例如：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int YH[30000]; //存放在bss段</div><div class="line">void main()&#123;&#125;</div><div class="line">------------------------------------------------------------</div><div class="line">int YH[30000]=&#123;1,2,3,4,5&#125;; //存放在data段  (已经初始化了)</div><div class="line">void main()&#123;&#125;</div></pre></td></tr></table></figure>
+<p>​<br>​<br>​<br>​<em> 数据段：通常是指用来存放程序中<strong>已初始化的全局变量和静态变量</strong>的一块内存区域。数据段属于静态内存分配，可以分为只读数据段和读写数据段。 字符串常量等，但一般都是放在只读数据段中。<br>​<br>​<br>​<br>​</em> 代码段：通常是指用来存放程序执行代码的一块内存区域。这部分区域的大小在程序运行前就已经确定，并且内存区域通常属于只读, 某些架构也允许代码段为可写，即允许修改程序。在代码段中，也有可能包含一些只读的常数变量，例如字符串常量等，但一般都是放在只读数据段中。 比如：<br>​<br>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">​int a = 0;  //拆分成int a和a = 0，int a在编译时就执行了，并没有放在代码段而只有a = 0这句放在了代码段</div><div class="line">​</div></pre></td></tr></table></figure></p>
+<p>​<br>​### 代码实践<br>​<br>​这里先推荐一篇文章，里面的例子讲的都挺经典的<a href="http://www.cnblogs.com/yif1991/p/5049638.html" target="_blank" rel="external">http://www.cnblogs.com/yif1991/p/5049638.html</a><br>​<br>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">​const int all = 4;//all为静态变量并且初始化了，放在数据段</div><div class="line">​</div><div class="line">​int main()&#123;</div><div class="line">​char *b = NULL;//main函数中的&quot;char *b = NULL&quot;定义了自动变量b，故其存放在栈区</div><div class="line">​</div><div class="line">​int c = 10;//c为局部变量，放在栈中</div><div class="line">​</div><div class="line">​b = (char*)malloc(1024*sizeof(char));//b申请部分内存空间，放在堆中</div><div class="line">​</div><div class="line">​free(b);</div><div class="line">​</div><div class="line">​printf(&quot;c = %d a = %d&quot;,c,all);</div><div class="line">​</div><div class="line">​&#125;</div><div class="line">​</div></pre></td></tr></table></figure></p>
+<p>​</p>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2017年10月12日 14:24</p>
-        <p>原始链接： <a class="post-url" href="/2017/10/08/音乐调性/" title="音乐调性">http://YangHQ666.com/2017/10/08/音乐调性/</a></p>
+        <p>最后更新： 2017年11月02日 22:31</p>
+        <p>原始链接： <a class="post-url" href="/2017/11/02/C语言之内存管理/" title="C语言之内存管理">http://YangHQ666.com/2017/11/02/C语言之内存管理/</a></p>
         <footer>
             <a href="http://YangHQ666.com">
                 <img src="/images/logo.png" alt="TonyYang">
@@ -190,7 +191,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://YangHQ666.com/2017/10/08/音乐调性/&title=《音乐调性》 — Welcome to TonyYang's Blog&pic=https://github.com/TonyYang666/TonyYang666.github.io/blob/master/mu.jpg?raw=true" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://YangHQ666.com/2017/11/02/C语言之内存管理/&title=《C语言之内存管理》 — Welcome to TonyYang's Blog&pic=http://YangHQ666.comimages/logo.png" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -200,22 +201,22 @@
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://YangHQ666.com/2017/10/08/音乐调性/&title=《音乐调性》 — Welcome to TonyYang's Blog&source=we have anything you want" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://YangHQ666.com/2017/11/02/C语言之内存管理/&title=《C语言之内存管理》 — Welcome to TonyYang's Blog&source=we have anything you want" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://YangHQ666.com/2017/10/08/音乐调性/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://YangHQ666.com/2017/11/02/C语言之内存管理/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《音乐调性》 — Welcome to TonyYang's Blog&url=http://YangHQ666.com/2017/10/08/音乐调性/&via=http://YangHQ666.com" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C语言之内存管理》 — Welcome to TonyYang's Blog&url=http://YangHQ666.com/2017/11/02/C语言之内存管理/&via=http://YangHQ666.com" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://YangHQ666.com/2017/10/08/音乐调性/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://YangHQ666.com/2017/11/02/C语言之内存管理/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -225,7 +226,7 @@
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://YangHQ666.com/2017/10/08/音乐调性/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://YangHQ666.com/2017/11/02/C语言之内存管理/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -237,9 +238,9 @@
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/音乐/" class="color3">音乐</a>
+    <a href="/tags/C语言/" class="color4">C语言</a>
       
-    <a href="/tags/乐理/" class="color3">乐理</a>
+    <a href="/tags/内存管理/" class="color5">内存管理</a>
       
   </li>
 
@@ -252,26 +253,16 @@
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本概念"><span class="post-toc-text">基本概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关于C大调"><span class="post-toc-text">关于C大调</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#唱名和音名"><span class="post-toc-text">唱名和音名</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#大调和小调"><span class="post-toc-text">大调和小调</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#怎样判断一首歌是什么调呢？"><span class="post-toc-text">怎样判断一首歌是什么调呢？</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C语言之内存管理"><span class="post-toc-text">C语言之内存管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内存中的五大区域"><span class="post-toc-text">内存中的五大区域</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2017/10/11/字符串搜素算法/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          字符搜素算法之KMP
-        
-      </span>
-    </a>
   
-  
-    <a href="/2017/10/08/UItableView使用方法/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">UItableView使用方法</span>
+    <a href="/2017/10/30/C语言结构体，联合体，枚举/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">C语言结构体，联合体，枚举</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
