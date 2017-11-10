@@ -3,23 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>C语言之内存管理 | Welcome to TonyYang&#39;s Blog</title>
+  <title>内存管理 | Welcome to TonyYang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="TonyYang,TonyYang's Blog" />
   
   <meta name="description" content="C语言之内存管理 有效的分配内存资源是程序设计中首要考虑的问题，由于之前对内存管理方面了解的不是很多，现在深入了解一下  内存中的五大区域先上一幅图：  栈：又称为堆栈，存放程序临时创建的局部变量，当局部变量的作用域被执行完毕之后，这个局部变量就会被系统立即回收。除此以外函数被调用时候，参数也会被压入发起调用的进程栈中，并且待到调用结束后，函数的返回值也会被存放回栈中，由于栈的先进先出特点，所以栈">
-<meta name="keywords" content="C语言,内存管理">
+<meta name="keywords" content="内存管理,C语言,Objective-C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C语言之内存管理">
+<meta property="og:title" content="内存管理">
 <meta property="og:url" content="http://YangHQ666.com/2017/11/02/C语言之内存管理/index.html">
 <meta property="og:site_name" content="Welcome to TonyYang&#39;s Blog">
 <meta property="og:description" content="C语言之内存管理 有效的分配内存资源是程序设计中首要考虑的问题，由于之前对内存管理方面了解的不是很多，现在深入了解一下  内存中的五大区域先上一幅图：  栈：又称为堆栈，存放程序临时创建的局部变量，当局部变量的作用域被执行完毕之后，这个局部变量就会被系统立即回收。除此以外函数被调用时候，参数也会被压入发起调用的进程栈中，并且待到调用结束后，函数的返回值也会被存放回栈中，由于栈的先进先出特点，所以栈">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yanghq666.com/2017/11/02/C语言之内存管理/内存管理.jpeg">
-<meta property="og:updated_time" content="2017-11-02T14:31:52.000Z">
+<meta property="og:updated_time" content="2017-11-03T08:57:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C语言之内存管理">
+<meta name="twitter:title" content="内存管理">
 <meta name="twitter:description" content="C语言之内存管理 有效的分配内存资源是程序设计中首要考虑的问题，由于之前对内存管理方面了解的不是很多，现在深入了解一下  内存中的五大区域先上一幅图：  栈：又称为堆栈，存放程序临时创建的局部变量，当局部变量的作用域被执行完毕之后，这个局部变量就会被系统立即回收。除此以外函数被调用时候，参数也会被压入发起调用的进程栈中，并且待到调用结束后，函数的返回值也会被存放回栈中，由于栈的先进先出特点，所以栈">
 <meta name="twitter:image" content="http://yanghq666.com/2017/11/02/C语言之内存管理/内存管理.jpeg">
   
@@ -119,7 +119,7 @@
         
   
     <h1 class="post-title" itemprop="name">
-      C语言之内存管理
+      内存管理
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -162,14 +162,25 @@
 <li>BBS段：通常是指用来存放程序中<strong>未初始化的</strong> <strong>全局变量</strong>和<strong>静态变量</strong>（static）的一块内存区域，BBS的全称是<em>Block Started by Symbol</em>的简称BSS段属于静态内存分配。 BSS节不包含任何数据，只是简单的维护开始和结束的地址，即总大小，以便内存区能在运行时分配并被有效地清零，也就是说：<strong>全局变量</strong>和<strong>静态变量</strong>一旦初始化后就回收，并转存到<strong>数据段</strong>中。例如：</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int YH[30000]; //存放在bss段</div><div class="line">void main()&#123;&#125;</div><div class="line">------------------------------------------------------------</div><div class="line">int YH[30000]=&#123;1,2,3,4,5&#125;; //存放在data段  (已经初始化了)</div><div class="line">void main()&#123;&#125;</div></pre></td></tr></table></figure>
-<p>​<br>​<br>​<br>​<em> 数据段：通常是指用来存放程序中<strong>已初始化的全局变量和静态变量</strong>的一块内存区域。数据段属于静态内存分配，可以分为只读数据段和读写数据段。 字符串常量等，但一般都是放在只读数据段中。<br>​<br>​<br>​<br>​</em> 代码段：通常是指用来存放程序执行代码的一块内存区域。这部分区域的大小在程序运行前就已经确定，并且内存区域通常属于只读, 某些架构也允许代码段为可写，即允许修改程序。在代码段中，也有可能包含一些只读的常数变量，例如字符串常量等，但一般都是放在只读数据段中。 比如：<br>​<br>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">​int a = 0;  //拆分成int a和a = 0，int a在编译时就执行了，并没有放在代码段而只有a = 0这句放在了代码段</div><div class="line">​</div></pre></td></tr></table></figure></p>
+<p>​<br>​<br>​</p>
+<ul>
+<li>数据段：通常是指用来存放程序中<strong>已初始化的全局变量和静态变量</strong>的一块内存区域。数据段属于静态内存分配，可以分为只读数据段和读写数据段。 字符串常量等，但一般都是放在只读数据段中。</li>
+</ul>
+<p>​<br>​<br>​</p>
+<ul>
+<li>代码段：通常是指用来存放程序执行代码的一块内存区域。这部分区域的大小在程序运行前就已经确定，并且内存区域通常属于只读, 某些架构也允许代码段为可写，即允许修改程序。在代码段中，也有可能包含一些只读的常数变量，例如字符串常量等，但一般都是放在只读数据段中。 比如：</li>
+</ul>
+<p>​<br>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">​int a = 0;  //拆分成int a和a = 0，int a在编译时就执行了，并没有放在代码段而只有a = 0这句放在了代码段</div><div class="line">​</div></pre></td></tr></table></figure></p>
 <p>​<br>​### 代码实践<br>​<br>​这里先推荐一篇文章，里面的例子讲的都挺经典的<a href="http://www.cnblogs.com/yif1991/p/5049638.html" target="_blank" rel="external">http://www.cnblogs.com/yif1991/p/5049638.html</a><br>​<br>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">​const int all = 4;//all为静态变量并且初始化了，放在数据段</div><div class="line">​</div><div class="line">​int main()&#123;</div><div class="line">​char *b = NULL;//main函数中的&quot;char *b = NULL&quot;定义了自动变量b，故其存放在栈区</div><div class="line">​</div><div class="line">​int c = 10;//c为局部变量，放在栈中</div><div class="line">​</div><div class="line">​b = (char*)malloc(1024*sizeof(char));//b申请部分内存空间，放在堆中</div><div class="line">​</div><div class="line">​free(b);</div><div class="line">​</div><div class="line">​printf(&quot;c = %d a = %d&quot;,c,all);</div><div class="line">​</div><div class="line">​&#125;</div><div class="line">​</div></pre></td></tr></table></figure></p>
-<p>​</p>
+<h2 id="OC内存管理"><a href="#OC内存管理" class="headerlink" title="OC内存管理"></a>OC内存管理</h2><blockquote>
+<p>由于移动设备的内存极其有限，所以每个APP所占的内存也是有限制的，当app所占用的内存较多时，系统就会发出内存警告，这时需要回收一些不需要再继续使用的内存空间，比如回收一些不再使用的对象和变量等。</p>
+</blockquote>
+<h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>​<br>​</p>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2017年11月02日 22:31</p>
-        <p>原始链接： <a class="post-url" href="/2017/11/02/C语言之内存管理/" title="C语言之内存管理">http://YangHQ666.com/2017/11/02/C语言之内存管理/</a></p>
+        <p>最后更新： 2017年11月03日 16:57</p>
+        <p>原始链接： <a class="post-url" href="/2017/11/02/C语言之内存管理/" title="内存管理">http://YangHQ666.com/2017/11/02/C语言之内存管理/</a></p>
         <footer>
             <a href="http://YangHQ666.com">
                 <img src="/images/logo.png" alt="TonyYang">
@@ -191,7 +202,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://YangHQ666.com/2017/11/02/C语言之内存管理/&title=《C语言之内存管理》 — Welcome to TonyYang's Blog&pic=http://YangHQ666.comimages/logo.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://YangHQ666.com/2017/11/02/C语言之内存管理/&title=《内存管理》 — Welcome to TonyYang's Blog&pic=http://YangHQ666.comimages/logo.png" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -201,7 +212,7 @@
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://YangHQ666.com/2017/11/02/C语言之内存管理/&title=《C语言之内存管理》 — Welcome to TonyYang's Blog&source=we have anything you want" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://YangHQ666.com/2017/11/02/C语言之内存管理/&title=《内存管理》 — Welcome to TonyYang's Blog&source=we have anything you want" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
@@ -211,7 +222,7 @@
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C语言之内存管理》 — Welcome to TonyYang's Blog&url=http://YangHQ666.com/2017/11/02/C语言之内存管理/&via=http://YangHQ666.com" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《内存管理》 — Welcome to TonyYang's Blog&url=http://YangHQ666.com/2017/11/02/C语言之内存管理/&via=http://YangHQ666.com" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -238,9 +249,11 @@
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
+    <a href="/tags/内存管理/" class="color5">内存管理</a>
+      
     <a href="/tags/C语言/" class="color4">C语言</a>
       
-    <a href="/tags/内存管理/" class="color5">内存管理</a>
+    <a href="/tags/Objective-C/" class="color2">Objective-C</a>
       
   </li>
 
@@ -253,12 +266,22 @@
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C语言之内存管理"><span class="post-toc-text">C语言之内存管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内存中的五大区域"><span class="post-toc-text">内存中的五大区域</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C语言之内存管理"><span class="post-toc-text">C语言之内存管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内存中的五大区域"><span class="post-toc-text">内存中的五大区域</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OC内存管理"><span class="post-toc-text">OC内存管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本原理"><span class="post-toc-text">基本原理</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
+  
+    <a href="/2017/11/10/iOS多线程之GCD/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          iOS多线程之GCD
+        
+      </span>
+    </a>
   
   
     <a href="/2017/10/30/C语言结构体，联合体，枚举/" id="article-nav-older" class="article-nav-link-wrap">
@@ -324,10 +347,10 @@
 <div class="sidebar-menu-box" id="sidebar-menu-box">
     <div class="sidebar-menu-box-container">
         <div id="sidebar-menu-box-categories">
-            <a class="category-link" href="/categories/C语言/">C语言</a><a class="category-link" href="/categories/Objective-C基础/">Objective-C基础</a><a class="category-link" href="/categories/UI设计/">UI设计</a><a class="category-link" href="/categories/算法/">算法</a><a class="category-link" href="/categories/音乐/">音乐</a>
+            <a class="category-link" href="/categories/C语言/">C语言</a><a class="category-link" href="/categories/Objective-C基础/">Objective-C基础</a><a class="category-link" href="/categories/UI设计/">UI设计</a><a class="category-link" href="/categories/iOS多线程/">iOS多线程</a><a class="category-link" href="/categories/算法/">算法</a><a class="category-link" href="/categories/音乐/">音乐</a>
         </div>
         <div id="sidebar-menu-box-tags">
-            <a href="/tags/C语言/" style="font-size: 20px;">C语言</a> <a href="/tags/C语言基础/" style="font-size: 10px;">C语言基础</a> <a href="/tags/Objective-C/" style="font-size: 20px;">Objective-C</a> <a href="/tags/iOS基础/" style="font-size: 10px;">iOS基础</a> <a href="/tags/iOS开发/" style="font-size: 20px;">iOS开发</a> <a href="/tags/乐理/" style="font-size: 10px;">乐理</a> <a href="/tags/你好，欢迎来到我的blog，这里应有尽有/" style="font-size: 10px;">你好，欢迎来到我的blog，这里应有尽有</a> <a href="/tags/内存管理/" style="font-size: 10px;">内存管理</a> <a href="/tags/搜索算法/" style="font-size: 10px;">搜索算法</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+            <a href="/tags/C语言/" style="font-size: 13.33px;">C语言</a> <a href="/tags/C语言基础/" style="font-size: 10px;">C语言基础</a> <a href="/tags/Objective-C/" style="font-size: 20px;">Objective-C</a> <a href="/tags/iOS基础/" style="font-size: 10px;">iOS基础</a> <a href="/tags/iOS多线程/" style="font-size: 10px;">iOS多线程</a> <a href="/tags/iOS开发/" style="font-size: 16.67px;">iOS开发</a> <a href="/tags/乐理/" style="font-size: 10px;">乐理</a> <a href="/tags/你好，欢迎来到我的blog，这里应有尽有/" style="font-size: 10px;">你好，欢迎来到我的blog，这里应有尽有</a> <a href="/tags/内存管理/" style="font-size: 10px;">内存管理</a> <a href="/tags/搜索算法/" style="font-size: 10px;">搜索算法</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
         </div>
     </div>
     <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
@@ -360,7 +383,7 @@
     <div class="mobile-header-tag-container">
         <span class="title">Tags</span>
         <div id="mobile-header-container-tags">
-            <a href="/tags/C语言/" style="font-size: 20px;">C语言</a> <a href="/tags/C语言基础/" style="font-size: 10px;">C语言基础</a> <a href="/tags/Objective-C/" style="font-size: 20px;">Objective-C</a> <a href="/tags/iOS基础/" style="font-size: 10px;">iOS基础</a> <a href="/tags/iOS开发/" style="font-size: 20px;">iOS开发</a> <a href="/tags/乐理/" style="font-size: 10px;">乐理</a> <a href="/tags/你好，欢迎来到我的blog，这里应有尽有/" style="font-size: 10px;">你好，欢迎来到我的blog，这里应有尽有</a> <a href="/tags/内存管理/" style="font-size: 10px;">内存管理</a> <a href="/tags/搜索算法/" style="font-size: 10px;">搜索算法</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+            <a href="/tags/C语言/" style="font-size: 13.33px;">C语言</a> <a href="/tags/C语言基础/" style="font-size: 10px;">C语言基础</a> <a href="/tags/Objective-C/" style="font-size: 20px;">Objective-C</a> <a href="/tags/iOS基础/" style="font-size: 10px;">iOS基础</a> <a href="/tags/iOS多线程/" style="font-size: 10px;">iOS多线程</a> <a href="/tags/iOS开发/" style="font-size: 16.67px;">iOS开发</a> <a href="/tags/乐理/" style="font-size: 10px;">乐理</a> <a href="/tags/你好，欢迎来到我的blog，这里应有尽有/" style="font-size: 10px;">你好，欢迎来到我的blog，这里应有尽有</a> <a href="/tags/内存管理/" style="font-size: 10px;">内存管理</a> <a href="/tags/搜索算法/" style="font-size: 10px;">搜索算法</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
         </div>
     </div>
 </div>

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS多线程之GCD | Welcome to TonyYang&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="TonyYang,TonyYang's Blog" />
+  
+  <meta name="description" content="iOS多线程之GCD 在此之前先了解一下什么是线程，进程，锁，以及[Runloop] 线程与进程：http://www.jianshu.com/p/95aa5446361d 锁：http://www.jianshu.com/p/1e59f0970bf5 Runloop：http://www.jianshu.com/p/d260d18dd551  GCD中的几个概念 1234567891011121">
+<meta name="keywords" content="Objective-C,iOS开发,iOS多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS多线程之GCD">
+<meta property="og:url" content="http://YangHQ666.com/2017/11/10/iOS多线程之GCD/index.html">
+<meta property="og:site_name" content="Welcome to TonyYang&#39;s Blog">
+<meta property="og:description" content="iOS多线程之GCD 在此之前先了解一下什么是线程，进程，锁，以及[Runloop] 线程与进程：http://www.jianshu.com/p/95aa5446361d 锁：http://www.jianshu.com/p/1e59f0970bf5 Runloop：http://www.jianshu.com/p/d260d18dd551  GCD中的几个概念 1234567891011121">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yanghq666.com/2017/11/10/iOS多线程之GCD/GCD.png">
+<meta property="og:image" content="http://yanghq666.com/2017/11/10/iOS多线程之GCD/线程与队列的区别.png">
+<meta property="og:image" content="http://yanghq666.com/2017/11/10/iOS多线程之GCD/串行加异步.png">
+<meta property="og:image" content="http://yanghq666.com/2017/11/10/iOS多线程之GCD/串行与异步.png">
+<meta property="og:image" content="http://yanghq666.com/2017/11/10/iOS多线程之GCD/并行异步.png">
+<meta property="og:image" content="http://yanghq666.com/2017/11/10/iOS多线程之GCD/串行同步.png">
+<meta property="og:image" content="http://yanghq666.com/2017/11/10/iOS多线程之GCD/死锁示意图.png">
+<meta property="og:image" content="http://yanghq666.com/2017/11/10/iOS多线程之GCD/死锁.png">
+<meta property="og:image" content="http://yanghq666.com/2017/11/10/iOS多线程之GCD/并行加同步.png">
+<meta property="og:image" content="http://yanghq666.com/2017/11/10/iOS多线程之GCD/总结.png">
+<meta property="og:updated_time" content="2017-11-10T15:22:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS多线程之GCD">
+<meta name="twitter:description" content="iOS多线程之GCD 在此之前先了解一下什么是线程，进程，锁，以及[Runloop] 线程与进程：http://www.jianshu.com/p/95aa5446361d 锁：http://www.jianshu.com/p/1e59f0970bf5 Runloop：http://www.jianshu.com/p/d260d18dd551  GCD中的几个概念 1234567891011121">
+<meta name="twitter:image" content="http://yanghq666.com/2017/11/10/iOS多线程之GCD/GCD.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">TonyYang&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        TonyYang&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        不积小流无以成江海
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="TonyYang" target="_blank" href="//TonyYang666.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/TonyYang666">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//weibo.com/18163308135">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Qq" target="_blank" href="https://user.qzone.qq.com/965807531/infocenter">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-iOS多线程之GCD" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      iOS多线程之GCD
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/iOS多线程/">iOS多线程</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2017-11-10
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h1 id="iOS多线程之GCD"><a href="#iOS多线程之GCD" class="headerlink" title="iOS多线程之GCD"></a>iOS多线程之GCD</h1><blockquote>
+<p>在此之前先了解一下什么是线程，进程，锁，以及[Runloop]</p>
+<p>线程与进程：<a href="http://www.jianshu.com/p/95aa5446361d" target="_blank" rel="external">http://www.jianshu.com/p/95aa5446361d</a></p>
+<p>锁：<a href="http://www.jianshu.com/p/1e59f0970bf5" target="_blank" rel="external">http://www.jianshu.com/p/1e59f0970bf5</a></p>
+<p>Runloop：<a href="http://www.jianshu.com/p/d260d18dd551" target="_blank" rel="external">http://www.jianshu.com/p/d260d18dd551</a></p>
+</blockquote>
+<h3 id="GCD中的几个概念"><a href="#GCD中的几个概念" class="headerlink" title="GCD中的几个概念"></a>GCD中的几个概念</h3><p><img src="/2017/11/10/iOS多线程之GCD/GCD.png" alt="GCD"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">//全局队列，一个并行的队列</div><div class="line">dispatch_get_global_queue</div><div class="line">//主队列，主线程中的唯一队列，一个串行队列</div><div class="line">dispatch_get_main_queue</div><div class="line">自定义队列</div><div class="line">//串行队列</div><div class="line">dispatch_queue_create(&quot;serialqueue&quot;, DISPATCH_QUEUE_SERIAL)</div><div class="line">//并行队列</div><div class="line">dispatch_queue_create(&quot;concurrentqueue&quot;, DISPATCH_QUEUE_CONCURRENT)</div><div class="line">同步异步线程创建</div><div class="line">//同步</div><div class="line">dispatch_sync(..., ^(block))</div><div class="line">//异步</div><div class="line">dispatch_async(..., ^(block))</div><div class="line"></div><div class="line">作者：kscorpio</div><div class="line">链接：http://www.jianshu.com/p/6f6e995c3f7a</div><div class="line">來源：简书</div><div class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</div></pre></td></tr></table></figure>
+<h3 id="队列和线程的区别"><a href="#队列和线程的区别" class="headerlink" title="队列和线程的区别"></a>队列和线程的区别</h3><p>简单来说，队列就是用来存放任务的“暂存区”，而线程是执行任务的路径，GCD将这些存在于队列的任务取出来放到相应的线程上去执行，而队列的性质决定了在其中的任务在哪种线程上执行</p>
+<p><img src="/2017/11/10/iOS多线程之GCD/线程与队列的区别.png" alt="线程与队列的区别"></p>
+<h3 id="串行加异步"><a href="#串行加异步" class="headerlink" title="串行加异步"></a>串行加异步</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">int main(int argc, const char * argv[]) &#123;</div><div class="line">@autoreleasepool &#123;</div><div class="line"></div><div class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;serial.queue&quot;, DISPATCH_QUEUE_SERIAL);//异步执行不会阻塞队列</div><div class="line"></div><div class="line">NSLog(@&quot;Begin ----- %@&quot;,[NSThread currentThread]);//先执行Begin后马上执行End</div><div class="line"></div><div class="line">dispatch_async(queue, ^&#123;</div><div class="line">NSLog(@&quot;Task ---1&quot;);</div><div class="line">&#125;);//异步执行+串行队列可以开启一个新的线程，所以Task 1线程是2</div><div class="line"></div><div class="line">dispatch_async(queue, ^&#123;</div><div class="line">NSLog(@&quot;Task --- 2&quot;);</div><div class="line">&#125;);//异步执行+串行，所以Task 2仍在线程2内（排在Task 1后面）</div><div class="line"></div><div class="line">NSLog(@&quot;End -----%@&quot;,[NSThread currentThread]);</div><div class="line">NSLog(@&quot;Hello, World!&quot;);</div><div class="line">&#125;</div><div class="line">return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>输出</strong></p>
+<p><img src="/2017/11/10/iOS多线程之GCD/串行加异步.png" alt="串行加异步"></p>
+<p><strong>过程如图所示：（串行的异步操作只会创建一个新线程）</strong></p>
+<p><img src="/2017/11/10/iOS多线程之GCD/串行与异步.png" alt="串行与异步"></p>
+<h3 id="并行加异步"><a href="#并行加异步" class="headerlink" title="并行加异步"></a>并行加异步</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">NSLog(@&quot;asyncConcurrent -- begin&quot;);</div><div class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;test.queue&quot;,</div><div class="line">DISPATCH_QUEUE_CONCURRENT);//并行队列</div><div class="line">//创建异步执行</div><div class="line">dispatch_async(queue, ^&#123;</div><div class="line">for (int i = 0; i&lt;2; ++i) &#123;</div><div class="line">NSLog(@&quot;1--------%@&quot;,[NSThread currentThread]);</div><div class="line">&#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">dispatch_async(queue, ^&#123;</div><div class="line">for (int i = 0; i&lt;2; ++i) &#123;</div><div class="line">NSLog(@&quot;2--------%@&quot;,[NSThread currentThread]);</div><div class="line">&#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">dispatch_async(queue, ^&#123;</div><div class="line">for (int i = 0; i&lt;2; ++i) &#123;</div><div class="line">NSLog(@&quot;3--------%@&quot;,[NSThread currentThread]);</div><div class="line">&#125;</div><div class="line">&#125;);</div><div class="line">NSLog(@&quot;end&quot;);</div><div class="line">&#125;</div><div class="line">/*</div><div class="line">1.并行队列加异步执行，创建了3个线程，三个任务都是同时执行，不分先后</div><div class="line">2.函数在执行时候，先执行的是begin和end这两句话。</div><div class="line">*/</div></pre></td></tr></table></figure>
+<p><strong>运行结果：</strong></p>
+<p><img src="/2017/11/10/iOS多线程之GCD/并行异步.png" alt="并行异步"></p>
+<h3 id="串行加同步"><a href="#串行加同步" class="headerlink" title="串行加同步"></a>串行加同步</h3><p><strong>正常情况下：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">int main(int argc, const char * argv[]) &#123;</div><div class="line">@autoreleasepool &#123;</div><div class="line"></div><div class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;标识符&quot;,DISPATCH_QUEUE_SERIAL);</div><div class="line">//串行队列</div><div class="line">NSLog(@&quot;Begin ----- %@&quot;,[NSThread currentThread]);</div><div class="line">dispatch_sync(queue, ^&#123;</div><div class="line">NSLog(@&quot;Task 1&quot;);</div><div class="line">&#125;);//同步执行</div><div class="line">dispatch_sync(queue, ^&#123;</div><div class="line">NSLog(@&quot;Task 2&quot;);</div><div class="line">&#125;);//同步执行</div><div class="line">NSLog(@&quot;End ----- %@&quot;,[NSThread currentThread]);</div><div class="line">NSLog(@&quot;Hello, World!&quot;);</div><div class="line">&#125;</div><div class="line">return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>输出：</strong></p>
+<p><img src="/2017/11/10/iOS多线程之GCD/串行同步.png" alt="串行同步"></p>
+<p><strong>进程死锁情况：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">int main(int argc, const char * argv[]) &#123;</div><div class="line">@autoreleasepool &#123;</div><div class="line">dispatch_queue_t s_queue = dispatch_queue_create(&quot;标识符&quot;,DISPATCH_QUEUE_SERIAL);//串形队列</div><div class="line">NSLog(@&quot;Begin ---- %@&quot;,[NSThread currentThread]); //外部任务</div><div class="line">dispatch_async(s_queue, ^&#123;</div><div class="line">NSLog(@&quot;Begin 2---%@&quot;,[NSThread currentThread]);</div><div class="line"></div><div class="line">dispatch_sync(s_queue, ^&#123;</div><div class="line">NSLog(@&quot;Task 1---%@&quot;,[NSThread currentThread]);//同步执行的内部任务</div><div class="line">&#125;);</div><div class="line">//当 外部任务 和 同步执行的内部任务 处于一个 串行队列 时会导致死锁</div><div class="line">dispatch_sync(s_queue, ^&#123;</div><div class="line">NSLog(@&quot;Task 2--- %@&quot;,[NSThread currentThread]);</div><div class="line">&#125;);</div><div class="line">NSLog(@&quot;End 2 ------%@&quot;,[NSThread currentThread]);</div><div class="line">&#125;);</div><div class="line">NSLog(@&quot;End --------%@&quot;,[NSThread currentThread]);</div><div class="line">NSLog(@&quot;Hello, World!&quot;);</div><div class="line">&#125;</div><div class="line">return 0;</div><div class="line">&#125;</div><div class="line">// 当 外部任务 和 同步执行的内部任务 处于一个 串行队列 时会导致死锁</div></pre></td></tr></table></figure>
+<p><strong>死锁示意图：</strong></p>
+<p><img src="/2017/11/10/iOS多线程之GCD/死锁示意图.png" alt="死锁示意图"></p>
+<p><strong>输出：</strong></p>
+<p><img src="/2017/11/10/iOS多线程之GCD/死锁.png" alt="死锁"></p>
+<h3 id="并行加同步"><a href="#并行加同步" class="headerlink" title="并行加同步"></a>并行加同步</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;并行加同步&quot;,DISPATCH_QUEUE_CONCURRENT);</div><div class="line">NSLog(@&quot;Begin ----- %@&quot;,[NSThread currentThread]);</div><div class="line">dispatch_sync(queue, ^&#123;</div><div class="line">NSLog(@&quot;Task 1 ------ %@&quot;,[NSThread currentThread]);</div><div class="line">&#125;);</div><div class="line">dispatch_sync(queue, ^&#123;</div><div class="line">NSLog(@&quot;Task 2 ----%@&quot;,[NSThread currentThread]);</div><div class="line">&#125;);</div><div class="line">NSLog((@&quot;End ------ %@&quot;), [NSThread currentThread]);</div><div class="line">NSLog(@&quot;Hello, World!&quot;);</div><div class="line">&#125;</div><div class="line">return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>运行结果：</strong></p>
+<p><img src="/2017/11/10/iOS多线程之GCD/并行加同步.png" alt="并行加同步"></p>
+<h3 id="最后总结一下："><a href="#最后总结一下：" class="headerlink" title="最后总结一下："></a>最后总结一下：</h3><p><img src="/2017/11/10/iOS多线程之GCD/总结.png" alt="总结"></p>
+<blockquote>
+<p>声明：本文非原创，仅仅整理一些开发技能知识文章，以作存档学习用<br>参考。参考文章：<a href="http://www.jianshu.com/p/6f6e995c3f7a" target="_blank" rel="external">http://www.jianshu.com/p/6f6e995c3f7a</a></p>
+</blockquote>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2017年11月10日 23:22</p>
+        <p>原始链接： <a class="post-url" href="/2017/11/10/iOS多线程之GCD/" title="iOS多线程之GCD">http://YangHQ666.com/2017/11/10/iOS多线程之GCD/</a></p>
+        <footer>
+            <a href="http://YangHQ666.com">
+                <img src="/images/logo.png" alt="TonyYang">
+                TonyYang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://YangHQ666.com/2017/11/10/iOS多线程之GCD/&title=《iOS多线程之GCD》 — Welcome to TonyYang's Blog&pic=http://YangHQ666.comimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://YangHQ666.com/2017/11/10/iOS多线程之GCD/&title=《iOS多线程之GCD》 — Welcome to TonyYang's Blog&source=we have anything you want" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://YangHQ666.com/2017/11/10/iOS多线程之GCD/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《iOS多线程之GCD》 — Welcome to TonyYang's Blog&url=http://YangHQ666.com/2017/11/10/iOS多线程之GCD/&via=http://YangHQ666.com" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://YangHQ666.com/2017/11/10/iOS多线程之GCD/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://YangHQ666.com/2017/11/10/iOS多线程之GCD/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Objective-C/" class="color2">Objective-C</a>
+      
+    <a href="/tags/iOS开发/" class="color1">iOS开发</a>
+      
+    <a href="/tags/iOS多线程/" class="color2">iOS多线程</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#iOS多线程之GCD"><span class="post-toc-text">iOS多线程之GCD</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GCD中的几个概念"><span class="post-toc-text">GCD中的几个概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#队列和线程的区别"><span class="post-toc-text">队列和线程的区别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#串行加异步"><span class="post-toc-text">串行加异步</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#并行加异步"><span class="post-toc-text">并行加异步</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#串行加同步"><span class="post-toc-text">串行加同步</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#并行加同步"><span class="post-toc-text">并行加同步</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#最后总结一下："><span class="post-toc-text">最后总结一下：</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/02/C语言之内存管理/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">内存管理</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2017 TonyYang<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://YangHQ666.com",
+      animate: true,
+      isHome: false,
+      share: true
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/C语言/">C语言</a><a class="category-link" href="/categories/Objective-C基础/">Objective-C基础</a><a class="category-link" href="/categories/UI设计/">UI设计</a><a class="category-link" href="/categories/iOS多线程/">iOS多线程</a><a class="category-link" href="/categories/算法/">算法</a><a class="category-link" href="/categories/音乐/">音乐</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/C语言/" style="font-size: 13.33px;">C语言</a> <a href="/tags/C语言基础/" style="font-size: 10px;">C语言基础</a> <a href="/tags/Objective-C/" style="font-size: 20px;">Objective-C</a> <a href="/tags/iOS基础/" style="font-size: 10px;">iOS基础</a> <a href="/tags/iOS多线程/" style="font-size: 10px;">iOS多线程</a> <a href="/tags/iOS开发/" style="font-size: 16.67px;">iOS开发</a> <a href="/tags/乐理/" style="font-size: 10px;">乐理</a> <a href="/tags/你好，欢迎来到我的blog，这里应有尽有/" style="font-size: 10px;">你好，欢迎来到我的blog，这里应有尽有</a> <a href="/tags/内存管理/" style="font-size: 10px;">内存管理</a> <a href="/tags/搜索算法/" style="font-size: 10px;">搜索算法</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/C语言/" style="font-size: 13.33px;">C语言</a> <a href="/tags/C语言基础/" style="font-size: 10px;">C语言基础</a> <a href="/tags/Objective-C/" style="font-size: 20px;">Objective-C</a> <a href="/tags/iOS基础/" style="font-size: 10px;">iOS基础</a> <a href="/tags/iOS多线程/" style="font-size: 10px;">iOS多线程</a> <a href="/tags/iOS开发/" style="font-size: 16.67px;">iOS开发</a> <a href="/tags/乐理/" style="font-size: 10px;">乐理</a> <a href="/tags/你好，欢迎来到我的blog，这里应有尽有/" style="font-size: 10px;">你好，欢迎来到我的blog，这里应有尽有</a> <a href="/tags/内存管理/" style="font-size: 10px;">内存管理</a> <a href="/tags/搜索算法/" style="font-size: 10px;">搜索算法</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+</body>
+</html>
