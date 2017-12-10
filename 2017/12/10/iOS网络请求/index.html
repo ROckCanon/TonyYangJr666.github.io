@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS网络请求 | Welcome to TonyYang&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="TonyYang,TonyYang's Blog" />
+  
+  <meta name="description" content="iOS网络请求 基本操作  HTTP请求在网络中的详细过程在Chrome中输入一个URL：www.baidu.com，这时候Chrome就开始了它的工作……..（大体过程） 1.首先，浏览器解析这个URL（www.baidu.com） 2.浏览器向本地DNS服务器发出请求，请求解析www.baidu.com对应的IP地址 3.域名系统DNS解析出www.baidu.com对应的IP地址。 4.浏览">
+<meta name="keywords" content="iOS开发,Objective-C,网络请求,基础必备">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS网络请求">
+<meta property="og:url" content="http://YangHQ666.com/2017/12/10/iOS网络请求/index.html">
+<meta property="og:site_name" content="Welcome to TonyYang&#39;s Blog">
+<meta property="og:description" content="iOS网络请求 基本操作  HTTP请求在网络中的详细过程在Chrome中输入一个URL：www.baidu.com，这时候Chrome就开始了它的工作……..（大体过程） 1.首先，浏览器解析这个URL（www.baidu.com） 2.浏览器向本地DNS服务器发出请求，请求解析www.baidu.com对应的IP地址 3.域名系统DNS解析出www.baidu.com对应的IP地址。 4.浏览">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yanghq666.com/2017/12/10/iOS网络请求/HTTP.png">
+<meta property="og:image" content="http://yanghq666.com/2017/12/10/iOS网络请求/POST与GET.png">
+<meta property="og:image" content="http://yanghq666.com/2017/12/10/iOS网络请求/HTTP请求.png">
+<meta property="og:image" content="http://yanghq666.com/2017/12/10/iOS网络请求/AI.png">
+<meta property="og:updated_time" content="2017-12-10T12:06:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS网络请求">
+<meta name="twitter:description" content="iOS网络请求 基本操作  HTTP请求在网络中的详细过程在Chrome中输入一个URL：www.baidu.com，这时候Chrome就开始了它的工作……..（大体过程） 1.首先，浏览器解析这个URL（www.baidu.com） 2.浏览器向本地DNS服务器发出请求，请求解析www.baidu.com对应的IP地址 3.域名系统DNS解析出www.baidu.com对应的IP地址。 4.浏览">
+<meta name="twitter:image" content="http://yanghq666.com/2017/12/10/iOS网络请求/HTTP.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">TonyYang&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        TonyYang&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        不积小流无以成江海
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="TonyYang" target="_blank" href="//TonyYang666.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/TonyYang666">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//weibo.com/18163308135">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Qq" target="_blank" href="https://user.qzone.qq.com/965807531/infocenter">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-iOS网络请求" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      iOS网络请求
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2017-12-10
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h2 id="iOS网络请求"><a href="#iOS网络请求" class="headerlink" title="iOS网络请求"></a><center><font color="DC143C" size="7">iOS网络请求</font><center></center></center></h2><blockquote>
+<p>基本操作</p>
+</blockquote>
+<h3 id="HTTP请求在网络中的详细过程"><a href="#HTTP请求在网络中的详细过程" class="headerlink" title="HTTP请求在网络中的详细过程"></a><center><font color="#00FFFF" size="6">HTTP请求在网络中的详细过程</font><center></center></center></h3><p>在Chrome中输入一个URL：www.baidu.com，这时候Chrome就开始了它的工作……..（大体过程）</p>
+<p>1.首先，浏览器解析这个URL（www.baidu.com）</p>
+<p>2.浏览器向本地DNS服务器发出请求，请求解析www.baidu.com对应的IP地址</p>
+<p>3.域名系统DNS解析出www.baidu.com对应的IP地址。</p>
+<p>4.浏览器与百度的相应web服务器建立TCP连接（利用的是DNS解析出的IP地址以及http的端口号80）。</p>
+<p>5.连接建立成功后，开始向web服务器发送请求，这个请求一般是GET或POST方式。</p>
+<p>6.web服务器响应请求，接收到这个请求后，进行处理。</p>
+<p>7.当数据传输完或者完成了请求，释放TCP连接。</p>
+<h3 id="URL的结构"><a href="#URL的结构" class="headerlink" title="URL的结构"></a><center><font color="#00FFFF" size="6">URL的结构</font><center></center></center></h3><p>URL又叫做<strong>资源统一定位符</strong>，直接拿个例子来说：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">比如这个URL：</div><div class="line">http://www.aspxfans.com:8080/news/index.asp?boardID=5&amp;ID=24618&amp;page=1#name</div><div class="line">1.http代表这个网页使用的是http协议，除了http协议以外，还有FTP（文件传输协议）等等，http后面的“／／”符号叫做分隔符。</div><div class="line">2.域名：域名部分为“www.aspxfans.com”.一个URL中，也可以使用IP地址作为域名使用（比如：210.42.151.15）</div><div class="line">3.端口：跟在域名后面的是端口，域名与端口之间是使用：作为分隔符。端口不是一个URL必须的部分，如果省略端口部分，则使用默认端口。（这里就是8080）</div><div class="line">4.虚拟目录：从域名后面第一个“／”还是到最后一个“／”为止，是虚拟目录部分。虚拟目录也不是URL必须的部分。（“/news/”）</div><div class="line">5.文件名部分：从域名后的最后一个“／”开始到“？”为止，是文件名部分，如果没有”？“，则是从域名后的最后一个“／”开始到“#”为止，是文件部分。那么从域名后的最后一个“／”开始到结束，都是文件名部分。（这里是index.asp）。文件名字也不是URL必须的部分，如果省略该部分，则使用默认的文件名。</div><div class="line">6.锚部分：从“#”开始到最后，都是锚部分。（这里的锚部分是name）</div><div class="line">7.参数部分：从“？”开始到“#”为止之间的部分为参数部分，又称为搜索部分，查询部分。（这里的参数为boardID=5&amp;ID=24618&amp;page=1）可以有多个参数，参数和参数之间是用&amp;作为分隔。</div></pre></td></tr></table></figure>
+<p><img src="/2017/12/10/iOS网络请求/HTTP.png" alt=""></p>
+<h3 id="基本请求方式"><a href="#基本请求方式" class="headerlink" title="基本请求方式"></a><center><font color="#00FFFF" size="6">基本请求方式</font><center></center></center></h3><p><img src="/2017/12/10/iOS网络请求/POST与GET.png" alt=""></p>
+<p>​    get是从服务器上获取数据,post是向服务器传送数据。前者把参数数据加在了将参    数直接写在访问路径上。操作简单，不过容易被外界看到，安全性不高，地址最多255字节,后者则是将参数放到body里面。POST请求操作相对复杂，需要将参数和地址分开，不过安全性高，参数放在body里面，不易被捕获.<br>​<br>​<br>​    从表面的意思看get 和 post的区别get就是获取数据，post就是发送数据。其实两者都可以的，在IOS向服务器发送请求里面可以带参数。<br>​    一般在浏览器中输入网址访问资源都是通过GET方式；在FORM提交中，可以通过Method指定提交方式为GET或者POST，默认为GET提交 。<br>​    Http定义了与服务器交互的不同方法，最基本的方法有4种，分别是GET，POST，PUT，DELETE。<br>​<br><img src="/2017/12/10/iOS网络请求/HTTP请求.png" alt=""><br>​<br>​    URL全称是资源描述符，我们可以这样认为：一个URL地址，它用于描述一个网络上的资源，而HTTP中的GET，POST，PUT，DELETE就对应着对这个资源的查 ，改 ，增 ，删 4个操作。到这里，大家应该有个大概的了解了，GET一般用于获取/查询 资源信息，而POST一般用于更新 资源信息,个人认为这是GET和POST的本质区别，也是协议设计者的本意，其它区别都是具体表现形式的差异 。</p>
+<ul>
+<li><p>GET请求是客户端向服务器索取数据的一种请求方式，（只包含请求头）。</p>
+</li>
+<li><p>​ POST请求是客户端向服务器提交数据的方式，（包含请求头和请求体）。</p>
+<h3 id="iOS中网络请求的基本操作"><a href="#iOS中网络请求的基本操作" class="headerlink" title="iOS中网络请求的基本操作"></a><center><font color="#00FFFF" size="6">iOS中网络请求的基本操作</font><center></center></center></h3></li>
+</ul>
+<p>​    1. 先创建一个NSString来保存想要请求的URL；（或者直接创建一个URL来保存，使用URLWithString这个方法）<br>​    2. 创建一个NSURL的对象<br>​    3. 创建一个NSURLRequest的请求<br>​    4. 创建一个会话（NSURLSession），并在一个闭包内完成对服务器返回值（data）的操作。<br>​    5. 对服务器的返回值（data）的操作：将data转换成json的字符串，并保存在一个变量中。<br>​    6. 对这个字符串进行操作……….(记得要启动这个会话（resume）)<br>​<br>​    具体代码如下：（这里是get操作）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">//将接口保存在字符串内并与输入内容拼接</div><div class="line"></div><div class="line"> NSString *URlstring = [NSString stringWithFormat:@&quot;http://www.tuling123.com/openapi/api?key=6c2cfaf7a7f088e843b550b0c5b89c26&amp;&amp;info=%@&quot;,_input.text];</div><div class="line"> </div><div class="line"> NSLog(@&quot;%@&quot;,_input.text);</div><div class="line"> </div><div class="line"> URlstring = [URlstring </div><div class="line"> stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];</div><div class="line"></div><div class="line"> //将字符串转换为URL</div><div class="line"></div><div class="line"> NSURL *url = [NSURL URLWithString:URlstring];</div><div class="line"></div><div class="line"> //创建一个请求</div><div class="line"></div><div class="line"> NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];</div><div class="line"></div><div class="line"> //创建一个任务会话，返回data</div><div class="line"></div><div class="line"> [[[NSURLSession sharedSession]dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) &#123;</div><div class="line"></div><div class="line"> if (error) &#123;</div><div class="line"></div><div class="line"> NSLog(@&quot;请求失败%@&quot;,error);</div><div class="line"></div><div class="line"> &#125;else&#123;</div><div class="line"></div><div class="line"> //将返回的data转成json后保存在字典里面</div><div class="line"></div><div class="line"> NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];</div><div class="line"></div><div class="line"> //创建一个模型</div><div class="line"></div><div class="line"> Model *dicModle = [Model FetchWithDic:jsonDic];</div><div class="line"></div><div class="line"> NSLog(@&quot;%@&quot;,dicModle.text);</div><div class="line"></div><div class="line"> NSLog(@&quot;请求成功&quot;);</div><div class="line"></div><div class="line"> //将输入的内容放在主线程内并异步操作</div><div class="line"></div><div class="line"> dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line"></div><div class="line"> _print.text = [NSString stringWithFormat:@&quot;%@&quot;,dicModle.text];</div><div class="line"></div><div class="line"> &#125;);</div><div class="line"> //   NSMutableDictionary *dataDic = [NSMutableDictionary dictionary];</div><div class="line"> &#125;</div><div class="line"> &#125;]resume];</div></pre></td></tr></table></figure>
+<p>​    POST请求和GET请求有一些地方不太一样，POST请求时不需要将网络请求的参数拼接到URL后面（即将URL问号后面的东西去掉），并且POST请求需要设置请求体（HTTPbody），并且进行UTF-8的转码，具体代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">//不需要将网络请求参数拼接到URL后面,即问号后面的东西都不要,因为后面会有一个操作是专门拼接参数。</div><div class="line"></div><div class="line"> NSURL *url = [NSURL URLWithString:@&quot;http://www.tuling123.com/openapi/api&quot;];</div><div class="line"> //post请求方式</div><div class="line"> NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];</div><div class="line"> [request setHTTPMethod:@&quot;POST&quot;];</div><div class="line"> //请求参数</div><div class="line"> NSString *newPhone = [_NumberTextFild text]; //获得其text</div><div class="line">//请求参数拼接</div><div class="line"> NSString *postParam = [NSString stringWithFormat:@&quot;key=6c2cfaf7a7f088e843b550b0c5b89c26&amp;&amp;info=%@&quot;,newPhone];//修改1234这个用户的信息</div><div class="line"></div><div class="line"> //进行各式转换</div><div class="line"></div><div class="line"> NSData *postData = [postParam dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line"> // NSString *mothed = request.HTTPBody;   </div><div class="line"> //post请求参数使用如下方法进行赋值</div><div class="line"> [request setHTTPBody:postData];</div><div class="line"> //    [[[NSURLSession sharedSession]downloadTaskWithRequest:request completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error)</div><div class="line"></div><div class="line"> [[[NSURLSession sharedSession]dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) &#123;</div><div class="line"></div><div class="line"> id obj = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];</div><div class="line"></div><div class="line"> NSLog(@&quot;%@&quot;,obj);</div><div class="line"></div><div class="line"> NSString *textString = [(NSDictionary *)obj objectForKey:@&quot;text&quot;];</div><div class="line"></div><div class="line"> NSLog(@&quot;%@&quot;,textString);</div><div class="line"></div><div class="line"> dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line"></div><div class="line"> [_userEmailView setupKey:@&quot;输出&quot; value:textString];</div><div class="line"></div><div class="line"> &#125;);</div><div class="line"> &#125;]resume];</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>虽然POST请求确实有些复杂，但在实际操作的过程中还是推荐使用post请求，毕竟post请求相对于get是要安全很多的。        </p>
+</blockquote>
+<h3 id="图灵机器人的API"><a href="#图灵机器人的API" class="headerlink" title=" 图灵机器人的API"></a><center> <font color="#00FFFF" size="6">图灵机器人的API</font><center></center></center></h3><p>​    大致的界面如下：<br>​    <img src="/2017/12/10/iOS网络请求/AI.png" alt=""><br>​<br>​    从博客里面找到的图灵机器人的API：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://www.tuling123.com/openapi/api?key=6c2cfaf7a7f088e843b550b0c5b89c26&amp;&amp;info=%@</div><div class="line">把后面的%@换成你想说的东西即可。</div></pre></td></tr></table></figure>
+<p>​    具体操作和上面的操作基本相同（get请求），上代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">//将接口保存在字符串内并与输入内容拼接</div><div class="line"></div><div class="line">NSString *URlstring = [NSString stringWithFormat:@&quot;http://www.tuling123.com/openapi/api?key=6c2cfaf7a7f088e843b550b0c5b89c26&amp;&amp;info=%@&quot;,_input.text];</div><div class="line">NSLog(@&quot;%@&quot;,_input.text);</div><div class="line">URlstring = [URlstring stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]; //支持中文设置</div><div class="line"></div><div class="line">//将字符串转换为URL</div><div class="line"></div><div class="line">NSURL *url = [NSURL URLWithString:URlstring];</div><div class="line"></div><div class="line">//创建一个请求</div><div class="line"></div><div class="line">NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];</div><div class="line"></div><div class="line">//创建一个任务会话，返回data</div><div class="line"></div><div class="line">[[[NSURLSession sharedSession]dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) &#123;</div><div class="line"></div><div class="line">if (error) &#123;</div><div class="line"></div><div class="line">NSLog(@&quot;请求失败%@&quot;,error);</div><div class="line"></div><div class="line">&#125;else&#123;</div><div class="line"></div><div class="line">//将返回的data转成json后保存在字典里面</div><div class="line"></div><div class="line">NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];</div><div class="line"></div><div class="line">//创建一个模型</div><div class="line"></div><div class="line">Model *dicModle = [Model FetchWithDic:jsonDic];   </div><div class="line">NSLog(@&quot;%@&quot;,dicModle.text);</div><div class="line">NSLog(@&quot;请求成功&quot;);</div><div class="line">//将输入的内容放在主线程内并异步操作</div><div class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">_print.text = [NSString stringWithFormat:@&quot;%@&quot;,dicModle.text];</div><div class="line"></div><div class="line">&#125;);</div><div class="line"></div><div class="line">//   NSMutableDictionary *dataDic = [NSMutableDictionary dictionary]; </div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">&#125;]resume];</div></pre></td></tr></table></figure>
+<h3 id="UIWebView"><a href="#UIWebView" class="headerlink" title="UIWebView"></a><center><font color="#00FFFF" size="6">UIWebView</font><center></center></center></h3><p>​    关于UIWebView，它是继承与UIview的，这里只说一下最基本的操作：<br>​    1.首先是声明一个webView，实例化初始化这个对象，设置背景颜色并添加到self的view上。<br>​    2.调用 loadRequest这个方法，将request这个请求传递给_webView,即：<br>​    <code>[_webView loadRequest:request];</code><br>​    具体代码如下：<br>​    .h文件:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@property(nonatomic,strong) UISearchBar *searchBar; //搜索条</div><div class="line">   @property(nonatomic,strong)UIWebView *webView;  //网页</div><div class="line">   @property(nonatomic,strong)UIButton *searchButton;  //搜索按钮</div></pre></td></tr></table></figure>
+<p>​    .m文件：(记得设置UIsearchBarDelegate)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">(void)viewDidLoad &#123;</div><div class="line"></div><div class="line">   [super viewDidLoad];</div><div class="line"></div><div class="line">   // Do any additional setup after loading the view, typically from a nib.</div><div class="line"></div><div class="line">   [self.view setBackgroundColor:[UIColor colorWithRed:0.776 green:0.776 blue:0.8 alpha:1.0]];</div><div class="line"></div><div class="line">   _searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(15, 34, self.view.frame.size.width - 15*2 -60, 44)];</div><div class="line"></div><div class="line">   _searchBar.placeholder = @&quot;http://www.baidu.com&quot;;</div><div class="line"></div><div class="line">   _searchBar.backgroundColor = [UIColor clearColor];</div><div class="line"></div><div class="line">   _searchBar.delegate = self;</div><div class="line"></div><div class="line">   [self.view addSubview:_searchBar];</div><div class="line">   </div><div class="line">   searchButton = [[UIButton alloc]initWithFrame:CGRectMake(searchBar.frame.origin.x+_searchBar.frame.size.width +10, 41, 60, 30)];</div><div class="line"></div><div class="line">   [_searchButton setTitle:@&quot;搜索&quot; forState:UIControlStateNormal];</div><div class="line"></div><div class="line">   [_searchButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];</div><div class="line"></div><div class="line">   _searchButton.layer.cornerRadius = 5.0;</div><div class="line"></div><div class="line">   _searchButton.layer.borderColor = [UIColor blackColor].CGColor;</div><div class="line"></div><div class="line">   _searchButton.layer.borderWidth = 1.0;</div><div class="line"></div><div class="line">   _searchButton.backgroundColor = [UIColor clearColor];</div><div class="line"></div><div class="line">   [_searchButton addTarget:self action:@selector(searchAction:) forControlEvents:UIControlEventTouchUpInside];</div><div class="line"></div><div class="line">   [self.view addSubview:_searchButton];    </div><div class="line">   _webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 85, self.view.frame.size.width, self.view.frame.size.height - 85)];</div><div class="line">   _webView.backgroundColor = [UIColor greenColor];</div><div class="line"></div><div class="line">   [self.view addSubview:_webView];</div><div class="line"></div><div class="line">   &#125;</div><div class="line"></div><div class="line">   -(void)searchAction:(id)sender&#123;</div><div class="line"></div><div class="line">   [_searchBar resignFirstResponder];</div><div class="line"></div><div class="line">   NSLog(@&quot;搜索按钮点击&quot;);   //右上方的搜索按钮</div><div class="line"></div><div class="line">   NSString *urlString = [_searchBar text];</div><div class="line"></div><div class="line">   NSURL *url = [NSURL URLWithString:urlString];</div><div class="line"></div><div class="line">   NSURLRequest *request = [NSURLRequest requestWithURL:url];</div><div class="line">   [_webView loadRequest:request];</div><div class="line"></div><div class="line">  </div><div class="line">   &#125;</div><div class="line">   -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar&#123;   </div><div class="line">   NSLog(@&quot;searchBar&quot;);    //键盘上蓝色的e的点击按钮</div><div class="line"></div><div class="line">   NSString *urlString = [_searchBar text];</div><div class="line"></div><div class="line">   NSURL *url = [NSURL URLWithString:urlString];</div><div class="line">   </div><div class="line">   NSURLRequest *request = [NSURLRequest requestWithURL:url];</div><div class="line">   [_webView loadRequest:request];</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2017年12月10日 20:06</p>
+        <p>原始链接： <a class="post-url" href="/2017/12/10/iOS网络请求/" title="iOS网络请求">http://YangHQ666.com/2017/12/10/iOS网络请求/</a></p>
+        <footer>
+            <a href="http://YangHQ666.com">
+                <img src="/images/logo.png" alt="TonyYang">
+                TonyYang
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://YangHQ666.com/2017/12/10/iOS网络请求/&title=《iOS网络请求》 — Welcome to TonyYang's Blog&pic=http://YangHQ666.comimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://YangHQ666.com/2017/12/10/iOS网络请求/&title=《iOS网络请求》 — Welcome to TonyYang's Blog&source=we have anything you want" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://YangHQ666.com/2017/12/10/iOS网络请求/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《iOS网络请求》 — Welcome to TonyYang's Blog&url=http://YangHQ666.com/2017/12/10/iOS网络请求/&via=http://YangHQ666.com" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://YangHQ666.com/2017/12/10/iOS网络请求/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://YangHQ666.com/2017/12/10/iOS网络请求/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/iOS开发/" class="color1">iOS开发</a>
+      
+    <a href="/tags/Objective-C/" class="color2">Objective-C</a>
+      
+    <a href="/tags/网络请求/" class="color5">网络请求</a>
+      
+    <a href="/tags/基础必备/" class="color5">基础必备</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#iOS网络请求"><span class="post-toc-text">iOS网络请求</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#HTTP请求在网络中的详细过程"><span class="post-toc-text">HTTP请求在网络中的详细过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#URL的结构"><span class="post-toc-text">URL的结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本请求方式"><span class="post-toc-text">基本请求方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#iOS中网络请求的基本操作"><span class="post-toc-text">iOS中网络请求的基本操作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#图灵机器人的API"><span class="post-toc-text"> 图灵机器人的API</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#UIWebView"><span class="post-toc-text">UIWebView</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/19/CALayer-上/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">CALayer(上)</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2017 TonyYang<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://YangHQ666.com",
+      animate: true,
+      isHome: false,
+      share: true
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/C语言/">C语言</a><a class="category-link" href="/categories/Objective-C基础/">Objective-C基础</a><a class="category-link" href="/categories/UI设计/">UI设计</a><a class="category-link" href="/categories/iOS多线程/">iOS多线程</a><a class="category-link" href="/categories/算法/">算法</a><a class="category-link" href="/categories/音乐/">音乐</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/CALayer/" style="font-size: 10px;">CALayer</a> <a href="/tags/C语言/" style="font-size: 15px;">C语言</a> <a href="/tags/C语言基础/" style="font-size: 10px;">C语言基础</a> <a href="/tags/Objective-C/" style="font-size: 20px;">Objective-C</a> <a href="/tags/UI设计/" style="font-size: 10px;">UI设计</a> <a href="/tags/iOS基础/" style="font-size: 10px;">iOS基础</a> <a href="/tags/iOS多线程/" style="font-size: 10px;">iOS多线程</a> <a href="/tags/iOS开发/" style="font-size: 20px;">iOS开发</a> <a href="/tags/乐理/" style="font-size: 10px;">乐理</a> <a href="/tags/你好，欢迎来到我的blog，这里应有尽有/" style="font-size: 10px;">你好，欢迎来到我的blog，这里应有尽有</a> <a href="/tags/内存管理/" style="font-size: 10px;">内存管理</a> <a href="/tags/基础必备/" style="font-size: 10px;">基础必备</a> <a href="/tags/搜索算法/" style="font-size: 10px;">搜索算法</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/网络请求/" style="font-size: 10px;">网络请求</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/CALayer/" style="font-size: 10px;">CALayer</a> <a href="/tags/C语言/" style="font-size: 15px;">C语言</a> <a href="/tags/C语言基础/" style="font-size: 10px;">C语言基础</a> <a href="/tags/Objective-C/" style="font-size: 20px;">Objective-C</a> <a href="/tags/UI设计/" style="font-size: 10px;">UI设计</a> <a href="/tags/iOS基础/" style="font-size: 10px;">iOS基础</a> <a href="/tags/iOS多线程/" style="font-size: 10px;">iOS多线程</a> <a href="/tags/iOS开发/" style="font-size: 20px;">iOS开发</a> <a href="/tags/乐理/" style="font-size: 10px;">乐理</a> <a href="/tags/你好，欢迎来到我的blog，这里应有尽有/" style="font-size: 10px;">你好，欢迎来到我的blog，这里应有尽有</a> <a href="/tags/内存管理/" style="font-size: 10px;">内存管理</a> <a href="/tags/基础必备/" style="font-size: 10px;">基础必备</a> <a href="/tags/搜索算法/" style="font-size: 10px;">搜索算法</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/网络请求/" style="font-size: 10px;">网络请求</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+  </div>
+</body>
+</html>
